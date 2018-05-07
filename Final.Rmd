@@ -2,7 +2,10 @@
 title: "Final"
 author: "Ian Dalton"
 date: "May 18, 2018"
-output: html_document
+output: 
+  html_document: 
+    toc: yes
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_file = file.path(dirname(inputFile), 'index.html')) })
 ---
 
 ```{r setup, include=FALSE}
@@ -22,13 +25,13 @@ library(lubridate)
 # Name TBD
 I will think of a cool name later.  
 
-walk users through the entire data science pipeline:
-- data curation,
-- parsing, and management
-- exploratory data analysis
-- hypothesis testing and
-- machine learning to provide analysis
-- and then the curation of a message or messages covering insights learned during the tutorial.
+walk users through the entire data science pipeline:  
+- data curation,  
+- parsing, and management  
+- exploratory data analysis  
+- hypothesis testing and  
+- machine learning to provide analysis  
+- and then the curation of a message or messages covering insights learned during the tutorial.  
 
 
 ## Introduction  
