@@ -61,18 +61,18 @@ options(tibble.width = Inf)
 ```
 
 
-Lets first have a look at these files:
+Lets test some demonstration of data
 
-### Peek at the dataset {.tabset}
+### example table {.tabset}
 
-#### Properties
-There is a total of 58 features per property. You can scroll the x-axis to see all features.
+#### table1
+There is an example of a dynamic data table possible because of web hosting the html output yippee.
 
 ```{r, result='asis', echo=FALSE}
 datatable(cars, style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
 ```
 
-#### Transactions
+#### table2
 
 ```{r, result='asis', echo=FALSE}
 datatable(pressure, style="bootstrap", class="table-condensed", options = list(dom = 'tp'))
