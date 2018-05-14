@@ -48,7 +48,7 @@ I first discovered this data while browsing kaggle. The kaggle dataset, found [h
 
 The dataset included data from 1998 to 2012.    
 I found that the dataset was created from a series of `csv` files contained within zip files for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in the form of text files.  
-I thought this would be a good oppurtunity showcase the data science pipeline. Particularly I wanted to show some data scraping and tidying as well to expand the amount of data available for analysis later.
+I thought this would be a good oppurtunity showcase the data scraping and tidying parts of the data science pipeline. This will also expand the amount of data we have available for analysis later.
 
 ## Data Scraping and Tidying
 I downloaded all the text documents locally and gave them descriptive names in order to use them easily in my R code I have included the text files in this projects [github repository](https://github.com/idalton/CMSC320Final/tree/gh-pages).  
@@ -79,14 +79,16 @@ For the most part, the first four files that deal with years 1986-2007 have the 
 A couple notes about the file format and how I approached scraping the data before I get to the code:
 - All the tables start with data from Alabama (AL)
 - All the tables end with data from Wyoming (WY)
-- the table order corresponds to the year order
+- the table order corresponds to the year order for each file  
 
-The `gethoneydatav1`is the data scraping function. the `v1` is because we will need a new version for the last file.  
-Given the output of `read_lines`, it finds all the start and end indices of each table, creates a string vector of all the lines of the table, makes each entry space delimited then adds it to a dataframe. The return value of the function is a dataframe that contains the data from each table in the file with an added column indicating the year for that data.
-```{r test}
+The `gethoneydatav1`is the data scraping function (`v1` because we will need `v2` for the last file).
+Given the output of `read_lines`, it finds all the start and end indices of each table, creates a string vector of all the lines of the table, makes each entry space delimited then adds it to a dataframe. The return value of the function is a dataframe that contains the data from each table in the file with an added column indicating the year for that data. The function also takes a `year` value which stands in as the base number to add onto the index to create the year colunms.
+
+```{r GetDataFuntion}
+
 # Column names taken from the text files
 headers <- c(
-  "state",
+  "state", # abreviations
 	"numcolonies", # 1,000s
 	"yieldpercolony", # in pounds
 	"production",# in 1000 pounds
@@ -94,13 +96,6 @@ headers <- c(
 	"avgprice", # cents
 	"value" #$1,000s
   )  
-
-honey_1986_1992 <- read_lines ("HoneyData_1986-1992.txt")
-honey_1993_1997 <- read_lines ("HoneyData_1993-1997.txt")
-honey_1998_2002 <- read_lines ("HoneyData_1998-2002.txt")
-honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
-
-
 
 gethoneydatav1 <- function(text,year) {
    # there is a space there because apparently one of the files has
@@ -126,13 +121,17 @@ gethoneydatav1 <- function(text,year) {
       # add a column for the year this data belongs two
       mutate(year = rep(year+index)) %>%
       # most of the data now is chars and groped units (i.e. 1000s pounds etc)
+      # the gsub calls are needed to prevent the ","s from messing up as.numeric
+      mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
+      mutate(yieldpercolony = as.numeric(gsub(",","",yieldpercolony))) %>%
+      mutate(production = as.numeric(gsub(",","",production))*1000) %>%
+      mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
+      mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
+      mutate(value = as.numeric(gsub(",","",value))*1000)
       
-    
-      # need to adjust varaiable values ie mulitlpe by 1000 etc
-      # need to rearange columns such that year is next after state
-      
-     # here I rearrange the columns such that the year value comes right after the state.abb
-     # I just do this because I think it makes it look slightly better.
+    # here I rearrange the columns such that the year value comes right after the state.abb
+    # I just do this because I think it makes it look slightly better.
+    table <- table[c(1,8,2,3,4,5,6,7)]
     
     # iteratively rbind the current years table to the accumulator dataframe
     df = rbind(df,table)
@@ -140,6 +139,20 @@ gethoneydatav1 <- function(text,year) {
   #return the accumlated data frame
   df
 }
+```
+
+Now its time to read in the text files and let the function do its job.  
+Note: The year parameters passed in are 1 year less than the first year held withi the file. this is becuase the indexing in the function above starts at 1.
+
+
+```{r dataframes}
+
+honey_1986_1992 <- read_lines ("HoneyData_1986-1992.txt")
+honey_1993_1997 <- read_lines ("HoneyData_1993-1997.txt")
+honey_1998_2002 <- read_lines ("HoneyData_1998-2002.txt")
+honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
+
+
 
 honey_1986_1992df <- gethoneydatav1(honey_1986_1992,1985)
 honey_1986_1992df
@@ -155,52 +168,25 @@ honey_2003_2007df
 
 
 
-
-
-
-
-
-# h1987 <- h1987 %>%
-#   str_replace_all(":", "") %>%
-#   str_replace_all("\\s\\s*", " " ) %>%
-#   trimws(which = c("both"))
-#   data_frame() %>%
-#   separate(1,sep = " ",headers, extra="drop") %>%
-#   mutate(year = rep(1986 + 9))
-# 
-# h1987
-
-
-  text <- honey_2003_2007
-
-  start_lines <- c(grep("AL ",text))
-  end_lines <- c(grep("WY ",text))
-  othersts_lines <- c(grep("Sts",text))  
-  
-  df = NULL
-  for (index in 1:length(start_lines)){
-    # data[[index]] <- honey_1986_1992[start_lines[index]:end_lines[index]]
-    table <- text[start_lines[index]:end_lines[index]]
-    
-    table <- table %>% 
-      str_replace_all(":", "") %>%
-      str_replace_all("\\s\\s*", " " ) %>%
-      data_frame() %>%
-      separate(1,sep = " ",headers, extra="drop") %>% # make columns with the given names
-      mutate(year = rep(index))
-    
-      # need to adjust varaiable values
-    
-    df = rbind(df,table)
-  }
-  df
-
-
-
 ```
 
 
-**Scraping Data from 1986-2007**
+### U.S. Honey Production Data 1986 - 2012 {.tabset}
+#### All Data
+The combined Honey Production Data.  
+
+```{r, result='asis', echo=FALSE}
+datatable(honey_1986_1992df, style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
+```
+
+#### 1986
+Honey Production Data from just 1986.  
+```{r, result='asis', echo=FALSE}
+datatable(honey_1986_1992df %>% filter(year = 1986), style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
+```
+
+**Scraping Data from 2008-2012**
+The methodology of scraping the data will be basically the same but this time instead of state abreviations being the start of the tables it is the full stat names. There is also different unecessary characters withing the table rows that we will need to remove. I have included a link to this file in particular below for conveince 
 
 
 
