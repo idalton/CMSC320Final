@@ -73,29 +73,77 @@ A couple notes about how I approached scraping the data before I get to the code
 I downloaded all the text documents locally and gave them descriptive names before trying to scrape the data within.
 
 ```{r test}
-
+# Column names taken from the text files
+headers <- c(
+  "state",
+	"numcolonies", # 1,000s
+	"yieldpercolony", # in pounds
+	"production",# in 1000 pounds
+	"stocks", # 1,000 Pounds
+	"avgprice", # cents
+	"value" #$1,000s
+  )  
 
 honey_1986_1992 <- read_lines ("HoneyData_1986-1992.txt")
+honey_1993_1997 <- read_lines ("HoneyData_1993-1997.txt")
+honey_1998_2002 <- read_lines ("HoneyData_1998-2002.txt")
+honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
 
-start_lines <- c(grep("AL",honey_1986_1992))
-end_lines <- c(grep("WY",honey_1986_1992))
-othersts <- c(grep("Sts",honey_1986_1992))
 
-data <- list()
-for (index in 1:length(start_lines)){
-  data[[index]] <- honey_1986_1992[start_lines[index]:end_lines[index]]
+
+getdata <- function(text,year) {
+  start_lines <- c(grep("AL",text))
+  end_lines <- c(grep("WY",text))
+  othersts_lines <- c(grep("Sts",text))  
+  
+  df = NULL
+  for (index in 1:length(start_lines)){
+    # data[[index]] <- honey_1986_1992[start_lines[index]:end_lines[index]]
+    table <- text[start_lines[index]:end_lines[index]]
+    
+    table <- table %>% 
+      str_replace_all(":", "") %>%
+      str_replace_all("\\s\\s*", " " ) %>%
+      data_frame() %>%
+      separate(1,sep = " ",headers, extra="drop") %>% # make columns with the given names
+      mutate(year = rep(year+index))
+    
+      # need to adjust varaiable values
+    
+    df = rbind(df,table)
+  }
+  df
 }
 
+honey_1986_1992df <- getdata(honey_1986_1992,1985)
+honey_1986_1992df
+
+honey_1993_1997df <- getdata(honey_1993_1997,1992)
+honey_1993_1997df
+
+honey_1998_2002df <- getdata(honey_1998_2002,1997)
+honey_1998_2002df
+
+honey_2003_2007df <- getdata(honey_2003_2007,2002)
+honey_2003_2007df
 
 
-# honey_1986_1992df
-h1986 <- honey_1986_1992[start_lines[1]:end_lines[1]]
 
-h1986 <- h1986 %>% 
-  str_replace_all(":", "") %>%
-  str_replace_all("\\s\\s*", " " )
 
-h1986
+# h1987 <- honey_1986_1992[start_lines[2]:end_lines[2]]
+# 
+# h1987 <- h1987 %>% 
+#   str_replace_all(":", "") %>%
+#   str_replace_all("\\s\\s*", " " ) %>%
+#   trimws(which = c("both"))
+#   data_frame() %>%
+#   separate(1,sep = " ",headers, extra="drop") %>%
+#   mutate(year = rep(1986 + 9))
+# 
+# h1987
+
+# df
+
 
 
 ```
