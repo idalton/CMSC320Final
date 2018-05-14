@@ -22,7 +22,7 @@ library(leaflet)
 library(lubridate)
 ```
 
-# Name TBD
+# Sweet Learning: Exploring the Data Science Pipeline with Honey
 I will think of a cool name later.  
 
 
@@ -38,40 +38,51 @@ walk users through the entire data science pipeline:
 
 
 ## Introduction  
+Do you like Bees? I dont like bees, but I do like honey and bee plant pollination. Bees are incredibly important for agriculture because the plant pollination they provide. A large portion of the food people eat comes from plants that have been pollinated by bees. Without the pollination bees provide, food producing plants In recent years bee colonies were in decline for a number of mysterious reasons. Things seem to be improving and there are significant efforts to solve the problems dealing with the decline. If you are interested in learning more you can do so [here](https://thehoneybeeconservancy.org/2017/06/22/honey-bees-heroes-planet/).
+The current bee situation prevents an interesting oppurtunity to dive into the data science pipeline with Honey data taken from the National Agricultural Statistics Service.
+
+In this tutorial I will guide you through: scraping honey production data N.A.S.S., making plots to help visualize the data, analyze the size of bee colonies to see if bees how bee populations are changing over the years, and make a predictor using a random forest to see if we can predict whether the number of bees will increase or decrease in the next years.
 
 **DATA**
+I first discovered this data while browsing kaggle. The kaggle dataset, found [here](https://www.kaggle.com/jessicali9530/honey-production), had honey production data recorded from the National Agricultural Statistics Service.
 
-While browsing datasets on kaggle, I encountered a dataset on honey production recorded from the National Agricultural Statistics Service which can be found here. 
-The dataset included production data from 1998 to 2012.    
+The dataset included data from 1998 to 2012.    
 I found that the dataset was created from a series of `csv` files contained within zip files for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in the form of text files.  
-I thought this would be a good oppurtunity showcase some data scraping and tidying as well to expand the amount of data available for analysis later.
-
-Also I can export the data frames I make and post them to kaggle as an expansion of the data set that I prevously came across
+I thought this would be a good oppurtunity showcase the data science pipeline. Particularly I wanted to show some data scraping and tidying as well to expand the amount of data available for analysis later.
 
 ## Data Scraping and Tidying
+I downloaded all the text documents locally and gave them descriptive names in order to use them easily in my R code I have included the text files in this projects [github repository](https://github.com/idalton/CMSC320Final/tree/gh-pages).  
+I encourage you to look at the text file links below to get a better understanding of the format of the text files and to see what we are working with when we scrape the data from them.  
 
-I encourage you to look at the text file links below to get a better understanding of the format of the text files and to see what we are working with. You may notice that the text format of the data in the 2008-2012 file is slightly different from the other files. We will need to address this later by changing how we scrape the data from that file in particular.
+**links:**
+[1](./HoneyData_2008-2012.txt)
 
-Also each of the tables have rows for totals at the bottom. I will not be taking the totals data from the files because I only want individual state data from each year. Additionally some states are not listed individually and get clumped together in the `Oth Sts` row.
 
-I may include this data such that i can have at least some data from rather than none from the unincluded states
-Or
-I may not include this data since I only want individual state data and
 
+
+You may notice that the text format of the data in the `HoneyData_2008-2012.txt` file is slightly different from that of the other files. We will need to address this later by changing how we scrape the data from that file in particular.
+
+Also each of the tables have rows that contain totals at the bottom. I will not be taking the totals data from the files because I only want individual state data from each year. Additionally some states are not listed individually and get clumped together in a `Oth Sts` row.
+
+For now, I will not be including this data. I only want to use state specific data and I dont think there is much benefit in taking the effort to include this data.
+
+
+`TODO`
 what to do about HI and AK alaska
 only contigous 48?
-ake average
+aka average
 
-For the most part the other files have a the same format so we can reuse the code to scrape the data from them.
+**Scraping Data from 1986-2007**
 
-A couple notes about how I approached scraping the data before I get to the code:
+For the most part, the first four files that deal with years 1986-2007 have the same format so we can reuse the code to scrape the data from them. I made a function that will scrape the data when given the text information of the files
+
+A couple notes about the file format and how I approached scraping the data before I get to the code:
 - All the tables start with data from Alabama (AL)
 - All the tables end with data from Wyoming (WY)
 - the table order corresponds to the year order
 
-
-I downloaded all the text documents locally and gave them descriptive names before trying to scrape the data within.
-
+The `gethoneydatav1`is the data scraping function. the `v1` is because we will need a new version for the last file.  
+Given the output of `read_lines`, it finds all the start and end indices of each table, creates a string vector of all the lines of the table, makes each entry space delimited then adds it to a dataframe. The return value of the function is a dataframe that contains the data from each table in the file with an added column indicating the year for that data.
 ```{r test}
 # Column names taken from the text files
 headers <- c(
@@ -91,9 +102,79 @@ honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
 
 
 
-getdata <- function(text,year) {
-  start_lines <- c(grep("AL",text))
-  end_lines <- c(grep("WY",text))
+gethoneydatav1 <- function(text,year) {
+   # there is a space there because apparently one of the files has
+  # the string "CALL" which was messing up the grep search
+  start_lines <- c(grep("AL ",text))
+  # i included the space here as well just to be safe
+  end_lines <- c(grep("WY ",text))
+  othersts_lines <- c(grep("Sts",text))  
+  
+  df = NULL # intializing the accumlator data frame
+  # for each table found in the text file
+  for (index in 1:length(start_lines)){
+    
+    # since we have index bounds of the table we can grab the lines that make up the table
+    table <- text[start_lines[index]:end_lines[index]]
+    # then we throe the line character vectors through the pipeline
+    table <- table %>% 
+      str_replace_all(":", "") %>%         # remove the ':' at the start
+      str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
+      data_frame() %>%
+      # split on that space delmiter and give the columns nice names
+      separate(1,sep = " ",headers, extra="drop") %>% 
+      # add a column for the year this data belongs two
+      mutate(year = rep(year+index)) %>%
+      # most of the data now is chars and groped units (i.e. 1000s pounds etc)
+      
+    
+      # need to adjust varaiable values ie mulitlpe by 1000 etc
+      # need to rearange columns such that year is next after state
+      
+     # here I rearrange the columns such that the year value comes right after the state.abb
+     # I just do this because I think it makes it look slightly better.
+    
+    # iteratively rbind the current years table to the accumulator dataframe
+    df = rbind(df,table)
+  }
+  #return the accumlated data frame
+  df
+}
+
+honey_1986_1992df <- gethoneydatav1(honey_1986_1992,1985)
+honey_1986_1992df
+
+honey_1993_1997df <- gethoneydatav1(honey_1993_1997,1992)
+honey_1993_1997df
+
+honey_1998_2002df <- gethoneydatav1(honey_1998_2002,1997)
+honey_1998_2002df
+
+honey_2003_2007df <- gethoneydatav1(honey_2003_2007,2002)
+honey_2003_2007df
+
+
+
+
+
+
+
+
+# h1987 <- h1987 %>%
+#   str_replace_all(":", "") %>%
+#   str_replace_all("\\s\\s*", " " ) %>%
+#   trimws(which = c("both"))
+#   data_frame() %>%
+#   separate(1,sep = " ",headers, extra="drop") %>%
+#   mutate(year = rep(1986 + 9))
+# 
+# h1987
+
+
+  text <- honey_2003_2007
+
+  start_lines <- c(grep("AL ",text))
+  end_lines <- c(grep("WY ",text))
   othersts_lines <- c(grep("Sts",text))  
   
   df = NULL
@@ -106,49 +187,46 @@ getdata <- function(text,year) {
       str_replace_all("\\s\\s*", " " ) %>%
       data_frame() %>%
       separate(1,sep = " ",headers, extra="drop") %>% # make columns with the given names
-      mutate(year = rep(year+index))
+      mutate(year = rep(index))
     
       # need to adjust varaiable values
     
     df = rbind(df,table)
   }
   df
-}
-
-honey_1986_1992df <- getdata(honey_1986_1992,1985)
-honey_1986_1992df
-
-honey_1993_1997df <- getdata(honey_1993_1997,1992)
-honey_1993_1997df
-
-honey_1998_2002df <- getdata(honey_1998_2002,1997)
-honey_1998_2002df
-
-honey_2003_2007df <- getdata(honey_2003_2007,2002)
-honey_2003_2007df
-
-
-
-
-# h1987 <- honey_1986_1992[start_lines[2]:end_lines[2]]
-# 
-# h1987 <- h1987 %>% 
-#   str_replace_all(":", "") %>%
-#   str_replace_all("\\s\\s*", " " ) %>%
-#   trimws(which = c("both"))
-#   data_frame() %>%
-#   separate(1,sep = " ",headers, extra="drop") %>%
-#   mutate(year = rep(1986 + 9))
-# 
-# h1987
-
-# df
 
 
 
 ```
 
-##Plots
+
+**Scraping Data from 1986-2007**
+
+
+
+## Exploratory Data Analysis
+lets make some nice plots that visualize some of the data we scraped.
+
+
+
+### plot 1 : UNTITLED
+
+
+
+
+### plot 2 : UNTITLED
+
+
+
+s
+
+### plot 3 : UNTITLED
+
+
+what do these plots show us?
+are there any peculirarites in the data that we need to address?
+and interesting insights that may have been discovered
+
 
 there will also be plots because who doesnt like well formated plots?  
 
