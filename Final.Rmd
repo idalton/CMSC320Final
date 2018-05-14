@@ -43,7 +43,7 @@ The current bee situation prevents an interesting oppurtunity to dive into the d
 
 In this tutorial I will guide you through: scraping honey production data N.A.S.S., making plots to help visualize the data, analyze the size of bee colonies to see if bees how bee populations are changing over the years, and make a predictor using a random forest to see if we can predict whether the number of bees will increase or decrease in the next years.
 
-**DATA**
+**DATA**  
 I first discovered this data while browsing kaggle. The kaggle dataset, found [here](https://www.kaggle.com/jessicali9530/honey-production), had honey production data recorded from the National Agricultural Statistics Service.
 
 The dataset included data from 1998 to 2012.    
@@ -54,8 +54,8 @@ I thought this would be a good oppurtunity showcase the data scraping and tidyin
 I downloaded all the text documents locally and gave them descriptive names in order to use them easily in my R code I have included the text files in this projects [github repository](https://github.com/idalton/CMSC320Final/tree/gh-pages).  
 I encourage you to look at the text file links below to get a better understanding of the format of the text files and to see what we are working with when we scrape the data from them.  
 
-**links:**
-[1](./HoneyData_2008-2012.txt)
+**links:**  
+[HoneyData_2008-2012.txt](./HoneyData_2008-2012.txt)
 
 
 
@@ -72,7 +72,7 @@ what to do about HI and AK alaska
 only contigous 48?
 aka average
 
-**Scraping Data from 1986-2007**
+**Scraping Data from 1986-2007**  
 
 For the most part, the first four files that deal with years 1986-2007 have the same format so we can reuse the code to scrape the data from them. I made a function that will scrape the data when given the text information of the files
 
@@ -182,7 +182,7 @@ datatable(honey_1986_1992df, style="bootstrap", class="table-condensed", options
 #### 1986
 Honey Production Data from just 1986.  
 ```{r, result='asis', echo=FALSE}
-datatable(honey_1986_1992df %>% filter(year = 1986), style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
+datatable(honey_1986_1992df %>% filter(year == 1986), style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
 ```
 
 **Scraping Data from 2008-2012**
