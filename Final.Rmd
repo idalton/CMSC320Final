@@ -17,13 +17,16 @@ library(ggplot2)
 library(stringr)
 library(DT)
 library(tidyr)
-# library(corrplot)
-# library(leaflet)
+library(readr)
+library(leaflet)
 library(lubridate)
 ```
 
 # Name TBD
 I will think of a cool name later.  
+
+
+
 
 walk users through the entire data science pipeline:  
 - data curation,  
@@ -38,12 +41,63 @@ walk users through the entire data science pipeline:
 
 **DATA**
 
-Here I will discuss the data set I will be using for my final projects Analysis.
+While browsing datasets on kaggle, I encountered a dataset on honey production recorded from the National Agricultural Statistics Service which can be found here. 
+The dataset included production data from 1998 to 2012.    
+I found that the dataset was created from a series of `csv` files contained within zip files for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in the form of text files.  
+I thought this would be a good oppurtunity showcase some data scraping and tidying as well to expand the amount of data available for analysis later.
 
-I will have embedded R chunks like this one which will show exactly what kind of data I will be using.
+Also I can export the data frames I make and post them to kaggle as an expansion of the data set that I prevously came across
 
-```{r cars}
-summary(cars)
+## Data Scraping and Tidying
+
+I encourage you to look at the text file links below to get a better understanding of the format of the text files and to see what we are working with. You may notice that the text format of the data in the 2008-2012 file is slightly different from the other files. We will need to address this later by changing how we scrape the data from that file in particular.
+
+Also each of the tables have rows for totals at the bottom. I will not be taking the totals data from the files because I only want individual state data from each year. Additionally some states are not listed individually and get clumped together in the `Oth Sts` row.
+
+I may include this data such that i can have at least some data from rather than none from the unincluded states
+Or
+I may not include this data since I only want individual state data and
+
+what to do about HI and AK alaska
+only contigous 48?
+ake average
+
+For the most part the other files have a the same format so we can reuse the code to scrape the data from them.
+
+A couple notes about how I approached scraping the data before I get to the code:
+- All the tables start with data from Alabama (AL)
+- All the tables end with data from Wyoming (WY)
+- the table order corresponds to the year order
+
+
+I downloaded all the text documents locally and gave them descriptive names before trying to scrape the data within.
+
+```{r test}
+
+
+honey_1986_1992 <- read_lines ("HoneyData_1986-1992.txt")
+
+start_lines <- c(grep("AL",honey_1986_1992))
+end_lines <- c(grep("WY",honey_1986_1992))
+othersts <- c(grep("Sts",honey_1986_1992))
+
+data <- list()
+for (index in 1:length(start_lines)){
+  data[[index]] <- honey_1986_1992[start_lines[index]:end_lines[index]]
+}
+
+
+
+# honey_1986_1992df
+h1986 <- honey_1986_1992[start_lines[1]:end_lines[1]]
+
+h1986 <- h1986 %>% 
+  str_replace_all(":", "") %>%
+  str_replace_all("\\s\\s*", " " )
+
+h1986
+
+
 ```
 
 ##Plots
