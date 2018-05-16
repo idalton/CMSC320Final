@@ -6,10 +6,12 @@ output:
   html_document: 
     toc: yes
 knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_file = file.path(dirname(inputFile), 'index.html')) })
+citecolor: gold
+urlcolor: gold
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,fig.width=12, fig.height=7)
 
 library(data.table)
 library(dplyr)
@@ -32,7 +34,7 @@ walk users through the entire data science pipeline:
 - data curation,  
 - parsing, and management  
 - exploratory data analysis  
-- hypothesis testing and  
+- hypothesis testing and
 - machine learning to provide analysis  
 - and then the curation of a message or messages covering insights learned during the tutorial.  
 
@@ -58,6 +60,30 @@ I encourage you to look at the text file links below to get a better understandi
 [HoneyData_2008-2012.txt](./HoneyData_2008-2012.txt)
 
 
+
+first some setup code  
+Here I extracted the columns from the tables in the text files. I make a vector of the abbreviated names which i can then use as column names when i create the data frames from the scraped table data. The data as it stands now in the tables are in varying aggregate units (ie 1,000's) we will fix this when we create the data frames  
+
+also first four files have state abbreviations in place of full statenames. This Is fine and we will use the abreviations for some plots when we make use of pl
+ 
+ 
+```{r setup}
+
+# Column names taken from the text files
+headers <- c(
+  "state", # abreviations
+	"numcolonies", # 1,000s
+	"yieldpercol", # in pounds
+	"production",# in 1000 pounds
+	"stocks", # 1,000 Pounds
+	"avgprice", # cents
+	"value" #$1,000s
+  )  
+
+
+abbr_to_name <- setNames(state.name,state.abb)
+
+```
 
 
 You may notice that the text format of the data in the `HoneyData_2008-2012.txt` file is slightly different from that of the other files. We will need to address this later by changing how we scrape the data from that file in particular.
@@ -86,16 +112,7 @@ Given the output of `read_lines`, it finds all the start and end indices of each
 
 ```{r GetDataFuntion}
 
-# Column names taken from the text files
-headers <- c(
-  "state", # abreviations
-	"numcolonies", # 1,000s
-	"yieldpercolony", # in pounds
-	"production",# in 1000 pounds
-	"stocks", # 1,000 Pounds
-	"avgprice", # cents
-	"value" #$1,000s
-  )  
+
 
 gethoneydatav1 <- function(text,year) {
    # there is a space there because apparently one of the files has
@@ -119,7 +136,7 @@ gethoneydatav1 <- function(text,year) {
       # split on that space delmiter and give the columns nice names
       separate(1,sep = " ",headers, extra="drop") %>% 
       # add a column for the year this data belongs two
-      mutate(year = rep(year+index)) %>%
+      mutate(year = rep(as.integer(year+index))) %>%
       # most of the data now is chars and groped units (i.e. 1000s pounds etc)
       # the gsub calls are needed to prevent the ","s from messing up as.numeric
       mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
@@ -153,40 +170,42 @@ honey_1998_2002 <- read_lines ("HoneyData_1998-2002.txt")
 honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
 
 
+masterhoneydf = NULL
+
+masterhoneydf <- masterhoneydf %>%
+  rbind(gethoneydatav1(honey_1986_1992,1985)) %>%
+  rbind(gethoneydatav1(honey_1993_1997,1992)) %>%
+  rbind(gethoneydatav1(honey_1998_2002,1997)) %>%
+  rbind(gethoneydatav1(honey_2003_2007,2002))
 
 honey_1986_1992df <- gethoneydatav1(honey_1986_1992,1985)
-honey_1986_1992df
-
 honey_1993_1997df <- gethoneydatav1(honey_1993_1997,1992)
-honey_1993_1997df
-
 honey_1998_2002df <- gethoneydatav1(honey_1998_2002,1997)
-honey_1998_2002df
-
 honey_2003_2007df <- gethoneydatav1(honey_2003_2007,2002)
-honey_2003_2007df
 
 
 
 ```
 
 
-### U.S. Honey Production Data 1986 - 2012 {.tabset}
-#### All Data
+
+
+**Scraping Data from 2008-2012**  
+The methodology of scraping the data will be basically the same but this time instead of state abreviations being the start of the tables it is the full stat names. There is also different unecessary characters withing the table rows that we will need to remove. I have included a link to this file in particular below for conveince 
+
+
+
+
+
+
+### U.S. Honey Production Data 1986 - 2012
 The combined Honey Production Data.  
 
 ```{r, result='asis', echo=FALSE}
-datatable(honey_1986_1992df, style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
+datatable(masterhoneydf,filter="top",style="bootstrap")
 ```
 
-#### 1986
-Honey Production Data from just 1986.  
-```{r, result='asis', echo=FALSE}
-datatable(honey_1986_1992df %>% filter(year == 1986), style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
-```
 
-**Scraping Data from 2008-2012**
-The methodology of scraping the data will be basically the same but this time instead of state abreviations being the start of the tables it is the full stat names. There is also different unecessary characters withing the table rows that we will need to remove. I have included a link to this file in particular below for conveince 
 
 
 
@@ -197,52 +216,96 @@ lets make some nice plots that visualize some of the data we scraped.
 
 ### plot 1 : UNTITLED
 
+```{r plot1}
+masterhoneydf %>%
+  ggplot(aes(x=year,y=numcolonies,group=factor(state))) +
+  # scale_y_log10() +
+  # color is a particular hex value for "honey" I found online
+  # aka I didnt think GOLD looked honey enough
+  geom_line(color="#f9c901", alpha=3/4, size=3/4) + 
+  labs(title="Number of Honey Colonies in States over Time",
+          x="Year", y="Number of Colonies")
 
-
-
+```
 ### plot 2 : UNTITLED
 
+```{r plot2v1}
+masterhoneydf %>%
+  group_by(state) %>%
+  summarize(avg = mean(numcolonies)) %>%
+  arrange(avg) %>%
+  ggplot(aes(x=state,y=avg)) +
+  geom_bar(stat="identity",fill="#f9c901") +
+  labs(title="Number of Honey Colonies in Each States ",
+          x="State", y="Number of Colonies")
 
+```
+
+**Plot 2 Continued**  
+
+lets revise the r code to show the values in order
+
+```{r plot2v2}
+masterhoneydf %>%
+  group_by(state) %>%
+  summarize(avg_numcol = mean(numcolonies)) %>%
+  ggplot(aes(x=reorder(state,-avg_numcol),y=avg_numcol)) +
+  geom_bar(stat="identity",fill="#f9c901") +
+  labs(title="Number of Honey Colonies in Each States ",
+          x="State", y="Number of Colonies")
+
+```
 
 s
 
 ### plot 3 : UNTITLED
 
+```{r fiftstates}
+library(fiftystater)
+# masterhoneydf %>%
+#   group_by(state) %>%
+#   summarize(avg_numcol = mean(numcolonies)) %>%
+#   ggplot(aes(map_id = abbr_to_name[state])) + 
+#   geom_map( aes(fill = avg_numcol), map = fifty_states) +
+#   expand_limits(x = fifty_states$long, y = fifty_states$lat) +
+#   coord_map() 
+
+
+
+crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
+
+# map_id creates the aesthetic mapping to the state name column in your data
+p <- ggplot(crimes, aes(map_id = state)) + 
+  # map points to the fifty_states shape data
+  geom_map(aes(fill = Assault), map = fifty_states) + 
+  expand_limits(x = fifty_states$long, y = fifty_states$lat) +
+  coord_map() 
+  # scale_x_continuous(breaks = NULL) + 
+  # scale_y_continuous(breaks = NULL) +
+  # labs(x = "", y = "") +
+  # theme(legend.position = "bottom", 
+  #       panel.background = element_blank())
+
+p
+
+```
+
+facet every five years
 
 what do these plots show us?
 are there any peculirarites in the data that we need to address?
 and interesting insights that may have been discovered
 
-
-there will also be plots because who doesnt like well formated plots?  
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-test 
-
-```{r include=FALSE}
-options(tibble.width = Inf)
-```
+## Hyothesis Testing
+My hypothesis is I will probably not finish this in time
 
 
-Lets test some demonstration of data
+##Machine Learning
 
-### example table {.tabset}
+Predicting the change in number of colonies in 2012
 
-#### table1
-There is an example of a dynamic data table possible because of web hosting the html output yippee.
+##Conclusion
 
-```{r, result='asis', echo=FALSE}
-datatable(cars, style="bootstrap", class="table-condensed", options = list(dom = 'tp',scrollX = TRUE))
-```
-
-#### table2
-
-```{r, result='asis', echo=FALSE}
-datatable(pressure, style="bootstrap", class="table-condensed", options = list(dom = 'tp'))
-```
+This was nice wasnt it
 
 
-Stay tuned!
