@@ -1,5 +1,5 @@
 ---
-title: "Final"
+title: "Sweet Learning: Exploring the Data Science Pipeline with Honey"
 author: "Ian Dalton"
 date: "May 18, 2018"
 output: 
@@ -11,7 +11,7 @@ urlcolor: gold
 ---
 
 ```{r libs, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,fig.width=12, fig.height=7)
+knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE,fig.width=12, fig.height=7)
 
 library(data.table)
 library(dplyr)
@@ -23,9 +23,6 @@ library(readr)
 library(leaflet)
 library(lubridate)
 ```
-
-# Sweet Learning: Exploring the Data Science Pipeline with Honey
-I will think of a cool name later.  
 
 
 
@@ -49,7 +46,7 @@ In this tutorial I will guide you through: scraping honey production data N.A.S.
 I first discovered this data while browsing kaggle. The kaggle dataset, found [here](https://www.kaggle.com/jessicali9530/honey-production), had honey production data recorded from the National Agricultural Statistics Service.
 
 The dataset included data from 1998 to 2012.    
-I found that the dataset was created from a series of `csv` files contained within zip files for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in the form of text files.  
+I found that the dataset was created from a series of `csv` files contained within zip files for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in text files.  
 I thought this would be a good oppurtunity showcase the data scraping and tidying parts of the data science pipeline. This will also expand the amount of data we have available for analysis later.
 
 ## Data Scraping and Tidying
@@ -57,7 +54,11 @@ I downloaded all the text documents locally and gave them descriptive names in o
 I encourage you to look at the text file links below to get a better understanding of the format of the text files and to see what we are working with when we scrape the data from them.  
 
 **links:**  
-[HoneyData_2008-2012.txt](./HoneyData_2008-2012.txt)
+[HoneyData_1986-1992.txt](./HoneyData_1986-1992.txt)  
+[HoneyData_1993-1997.txt](./HoneyData_1993-1997.txt)  
+[HoneyData_1998-2002.txt](./HoneyData_1998-2002.txt)  
+[HoneyData_2003-2007.txt](./HoneyData_2003-2007.txt)  
+[HoneyData_2008-2012.txt](./HoneyData_2008-2012.txt)  
 
 
 
@@ -210,50 +211,71 @@ There are two problems with the tables in this file
 
 text <- read_lines("HoneyData_2008-2012.txt")
 
-start_lines <- c(grep("Alabama .", text)) # " ." added for increased accuracy
-# I included the space here as well just to be safe
-end_lines <- c(grep("Wyoming .", text))
+# " ." added for increased accuracy
+start_lines <- c(grep("Alabama .", text)) 
+# all the tables in this doc end with an "Other States" row
 othersts_lines <- c(grep("Other States",text))  
 
+honey_2008_2012df <- NULL
 for (index in 1:length(start_lines)){
     
     # since we have index bounds of the table we can grab the lines that make up the table
     table <- text[start_lines[index]:othersts_lines[index]]
     # then we throw the line character vectors through the pipeline
     table <- table %>% 
-      str_replace_all("\\.", "") %>%        # remove all '.' , remember to escape it
+      str_replace_all("\\.", "") %>%       # remove all '.', remember to escape it
       str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
       data_frame() %>%
       separate(1,sep = " : ",c("state","data"), extra="drop") %>% # separate first colunm on " : "
       # we already have the state columns so we dont need that element I headers hence the '-1'
       separate(2,sep = " ",headers[-1], extra="drop") %>% # separate second colmn on spaces
-      rbind(c("AK",rep("0",7))) %>%
-      drop_na()
-      # complete(-state, fill= list(rep(0))) 
-      
-      
-    #   # add a column for the year this data belongs two
-    #   mutate(year = rep(as.integer(year+index))) %>%
-    #   # most of the data now is chars and groped units (i.e. 1000s pounds etc)
-    #   # the gsub calls are needed to prevent the ","s from messing up as.numeric
-    #   mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
-    #   mutate(yieldpercolony = as.numeric(gsub(",","",yieldpercolony))) %>%
-    #   mutate(production = as.numeric(gsub(",","",production))*1000) %>%
-    #   mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
-    #   mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
-    #   mutate(value = as.numeric(gsub(",","",value))*1000)
-    #   
+      rbind(c("Alaska",rep("0",7))) %>% # adding a zero line for alaska
+      drop_na() %>% # drop columns that have na which are a few empty lines from the table
+      # most of the data now is chars and groped units (i.e. 1000s pounds etc)
+      # the gsub calls are needed to prevent the ","s from messing up as.numeric
+      mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
+      mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
+      mutate(production = as.numeric(gsub(",","",production))*1000) %>%
+      mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
+      mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
+      mutate(value = as.numeric(gsub(",","",value))*1000)
+    
+    
+    # figure out which states are not present
+    states_not_present <- state.name[! state.name %in% table$state]
+    # find the number of states that are not present
+    num_states_not_present <- length(states_not_present)
+    # extract the aggregated other states  table values without the bogus state name
+    other_state_vals <- subset(table, str_detect(table$state,"States"))[-1]
+    # we only want the data colunms so we can drop the first column
+    # and then we want the other cols to be divided by the number of states they are summed from
+    # except for yieldpercol and avg price
+    other_state_vals[1,1] <- round(other_state_vals[1,1]/num_states_not_present)
+    other_state_vals[1,3] <- round(other_state_vals[1,3]/num_states_not_present)
+    other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
+    other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
+    
+    other <- cbind(states_not_present,other_state_vals)
+    colnames(other)[1] <- "state"
+  
+    table <- table %>% rbind(other) %>%
+      filter(!str_detect(state,"State")) %>%
+      # add a column for the year this data belongs two
+      mutate(year = rep(as.integer(2007+index)))
+
+    
     # # here I rearrange the columns such that the year value comes right after the state.abb
     # # I just do this because I think it makes it look slightly better.
-    # table <- table[c(1,8,2,3,4,5,6,7)]
+    table <- table[c(1,8,2,3,4,5,6,7)]
     # 
     # # iteratively rbind the current years table to the accumulator dataframe
-    # df = rbind(df,table)
+    honey_2008_2012df = rbind(honey_2008_2012df,table)
   }
-table
+honey_2008_2012df
 
 test <- state.name[! state.name %in% table$state]  
 test
+
 ```
 
 
@@ -263,8 +285,6 @@ The combined Honey Production Data.
 ```{r, result='asis', echo=FALSE}
 datatable(masterhoneydf,filter="top",style="bootstrap")
 ```
-
-
 
 
 
@@ -278,9 +298,7 @@ lets make some nice plots that visualize some of the data we scraped.
 ```{r plot1}
 masterhoneydf %>%
   ggplot(aes(x=year,y=numcolonies,group=factor(state))) +
-  # scale_y_log10() +
   # color is a particular hex value for "honey" I found online
-  # aka I didnt think GOLD looked honey enough
   geom_line(color="#f9c901", alpha=3/4, size=3/4) + 
   labs(title="Number of Honey Colonies in States over Time",
           x="Year", y="Number of Colonies")
@@ -323,15 +341,6 @@ masterhoneydf %>%
 
 ```{r fiftstates}
 library(fiftystater)
-# masterhoneydf %>%
-#   group_by(state) %>%
-#   summarize(avg_numcol = mean(numcolonies)) %>%
-#   ggplot(aes(map_id = abbr_to_name[state])) + 
-#   geom_map( aes(fill = avg_numcol), map = fifty_states) +
-#   expand_limits(x = fifty_states$long, y = fifty_states$lat) +
-#   coord_map() 
-
-
 
 crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
 
@@ -342,11 +351,11 @@ p <- ggplot(crimes, aes(map_id = state)) +
   expand_limits(x = fifty_states$long, y = fifty_states$lat) +
   coord_map() 
   
-yolo <- masterhoneydf %>%
+masterhoneydf %>%
   group_by(state) %>%
-  summarize(avg_numcol = mean(numcolonies))
+  summarize(avg_numcol = mean(numcolonies)) %>%
 
-p <- ggplot(yolo,aes(map_id = str_to_lower(abbr_to_name[state]))) + 
+ggplot(aes(map_id = str_to_lower(abbr_to_name[state]))) + 
   # map points to the fifty_states shape data
   geom_map(aes(fill = avg_numcol), map = fifty_states) + 
   expand_limits(x = fifty_states$long, y = fifty_states$lat) +
@@ -359,7 +368,7 @@ p <- ggplot(yolo,aes(map_id = str_to_lower(abbr_to_name[state]))) +
         panel.background = element_blank())
 
 
-p
+
 
 ```
 
@@ -374,11 +383,29 @@ My hypothesis is I will probably not finish this in time
 
 
 ##Machine Learning
+In this section I will show how to create a prediction with the given data. Particularly, the model will predict the whether the change of number of colonies will go up or down. In this paritcular example we will try to predict the change in number of colonies in 2012 using all the data prior to 2012 (1986-2011). In order to do this we will need to create a data frame that has the result we are looking for.
 
-Predicting the change in number of colonies in 2012
+###Setup
+This new outcome dataframe needs to...
+```{r outcome}
+
+```
+
+
+###Creating the Model 
+I will make use of a random forest to make the model...
+```{r}
+
+```
+
+
+
+
+###Testing
+To test this model we would use a k-fold valdidation technique. Unfortunately I was unable to complete this section in time to submit the project Im sorry to let you down. If you like to learn more about k-fold validiation I recommend checking out this site and this set of lecture slides from my Intro to data science course
 
 ##Conclusion
 
-This was nice wasnt it
-
+`This was nice wasnt it.`
+We learned how to scrape data from text files, how to handle missing data. We saw how to make graphs that can intuitively show the data and how attributes relate to one another. We were also able to make a map that that can show the data geographically which is not always possible in some datasets
 

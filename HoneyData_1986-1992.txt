@@ -1,0 +1,567 @@
+
+United States
+Department of
+Agriculture  
+
+National
+Agricultural
+Statistics
+Service
+
+Agricultural
+Statistics
+Board
+
+Statistical
+Bulletin
+Number 912
+
+
+
+                                                          Honey
+
+                                                 Final Estimates 1986-92
+
+
+
+Honey:  Final estimates for 1986-1992.  Agricultural Statistics Board.
+        National Agricultural Statistics Service, U.S. Department of
+Agriculture.
+
+
+
+
+                                                  Abstract
+
+This publication presents final honey estimates made by the Agricultural
+Statistics Board for the period 1986-1992.  The previous official series
+multi-year publication for honey was Statistical Bulletin No. 673 issued
+September 1981 for the years 1976-1979.  Official NASS estimates are available
+for 1980-1981 in the NASS annual release "Honey" with the publication code SeHy
+1-3 (82).  NASS estimates for honey were not made for the years 1982-1985.  For
+the period 1986-1992 NASS honey estimates were for producers with five or more
+colonies, including number of honey producing colonies, yield per colony, honey
+production, stocks held by producers, average price received by producers at
+point of first sale, and value of production.  Colonies which produced honey in
+more than one State were counted in each State and yields may be understated. 
+Estimates contained in this publication provide a historical record and
+benchmark for current estimates.
+
+
+
+
+                                                Introduction
+
+Honey production estimates were published on a current basis during 1986-1992
+in annual reports.  Primary data used in preparing the current honey estimates
+were obtained from producers using non-probability surveys.  Large producers
+were sampled more heavily than small operations.  Information was collected by
+mail, telephone and face-to-face personal interviews.  Survey indications are
+subject to sampling error and non-sampling errors, such as omissions,
+duplication, and mistakes in reporting, recording and processing the data. 
+Errors are minimized through quality controls in the data collection process
+and through a careful review of all reported data for consistency and
+reasonableness.  Lists of honey producers are updated annually in each State
+prior to sampling.
+
+Revisions were made only after a thorough review of the original data, with
+consideration given to all additional data now available, including the 1992
+Census of Agriculture.  At the national level, revisions of estimates of honey
+production were one to four percent. 
+
+
+
+
+
+
+
+
+
+
+For information call Tom Kruchten at (202) 690-4870.  Office hours are
+8:00 a.m. to 4:30 p.m. ET.
+
+
+Washington  D.C., 20250                                             March 1995
+
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1986 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      41        42          1,722        327      60           1,033    
+AZ     :      84        50          4,200        756      52           2,184    
+AR     :      21        64          1,344         54      40             538    
+CA     :     520        52         27,040      3,515      54          14,602    
+CO     :      41        78          3,198        480      54           1,727    
+CT     :       3        20             60         22      91              55    
+DE     :       1        25             25         13     105              26    
+FL     :     290        75         21,750      2,828      53          11,528    
+GA     :     115        41          4,715        377      51           2,405    
+HI     :       9       147          1,323         93      56             741    
+ID     :     115        45          5,175        621      51           2,639    
+IL     :      30        27            810        267      81             656    
+IN     :      27        23            621        180      75             466    
+IA     :      40        59          2,360        519      53           1,251    
+KS     :      47        85          3,995        519      55           2,197    
+KY     :      15        15            225         86      98             221    
+LA     :      35        58          2,030        102      42             853    
+ME     :       9        17            153         54      72             110    
+MD     :       8        28            224         65      74             166    
+MA     :      10        15            150         54      66              99    
+MI     :      93        56          5,208        990      51           2,656    
+MN     :     136        78         10,608        636      47           4,986    
+MS     :      23        54          1,242         75      45             559    
+MO     :      30        53          1,590        286      46             731    
+MT     :     110        64          7,040        211      50           3,520    
+NE     :     100        76          7,600        532      47           3,572    
+NV     :       9        40            360         54      50             180    
+NH     :       1        14             14          2     106              15    
+NJ     :      16        30            480        216      77             370    
+NM     :      19        63          1,197        407      54             646    
+NY     :      92        32          2,944        530      65           1,914    
+NC     :      18        30            540        184      69             373    
+ND     :     300       107         32,100      1,926      45          14,445    
+OH     :      59        26          1,534        445      68           1,043    
+OK     :      15        48            720        194      94             677    
+OR     :      59        43          2,537        507      56           1,421    
+PA     :      50        32          1,600        624      55             880    
+RI     :       1        15             15          5     150              23    
+SC     :      15        25            375         60      71             266    
+SD     :     201       113         22,713      5,224      46          10,448    
+TN     :      36        32          1,152        426      78             899    
+TX     :     129        62          7,998        880      52           4,159    
+UT     :      35        45          1,575        252      61             961    
+VT     :       7        17            119         42      91             108    
+VA     :      30        38          1,140        103      60             684    
+WA     :      75        48          3,600        360      48           1,728    
+WV     :      17        30            510        260      79             403    
+WI     :      94        50          4,700        987      52           2,444    
+WY     :      40        52          2,080        354      54           1,123    
+       :                                                                        
+US 3/  :   3,271        62.5      204,438     27,704      51.1       104,468    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  U.S. price weighted by survey expanded      
+sales.  Total may not add due to rounding.                                      
+                                                                                
+                                                                                
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1987 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      46        35          1,610        242      53             853    
+AZ     :      80        47          3,760        338      52           1,955    
+AR     :      29        69          2,001        200      44             880    
+CA     :     540        33         17,820      1,782      49           8,732    
+CO     :      44        73          3,212         96      68           2,184    
+CT     :       2        34             68         24     117              80    
+DE     :       1        29             29         18      93              27    
+FL     :     240        79         18,960      1,327      49           9,290    
+GA     :     120        38          4,560        502      54           2,462    
+HI     :       9       190          1,710        581      44             752    
+ID     :     120        60          7,200      1,080      54           3,888    
+IL     :      28        75          2,100        777      82           1,722    
+IN     :      25        58          1,450        363      58             841    
+IA     :      44       103          4,532      1,314      54           2,447    
+KS     :      46        51          2,346        821      58           1,361    
+KY     :      14        25            350        147      96             336    
+LA     :      35        75          2,625        105      47           1,234    
+ME     :       9        46            414         70      68             282    
+MD     :       7        35            245         88      62             152    
+MA     :      11        15            165         33      61             101    
+MI     :      93        68          6,324      1,202      53           3,352    
+MN     :     160       108         17,280      1,382      46           7,949    
+MS     :      19        60          1,140         80      42             479    
+MO     :      30        65          1,950        156      48             936    
+MT     :      95       102          9,690      1,066      44           4,264    
+NE     :     110        90          9,900      1,980      44           4,356    
+NV     :      11        30            330         66      79             261    
+NH     :       1        32             32         13      93              30    
+NJ     :      25        34            850        213      51             434    
+NM     :      19        50            950        162      59             561    
+NY     :      90        44          3,960      1,188      66           2,614    
+NC     :      20        48            960        173      80             768    
+ND     :     300       110         33,000      3,630      45          14,850    
+OH     :      55        50          2,750        853      67           1,843    
+OK     :      10        70            700        140      67             469    
+OR     :      55        42          2,310        531      52           1,201    
+PA     :      48        39          1,872        711      68           1,273    
+RI     :       1        32             32         10     139              44    
+SC     :      15        34            510         41      64             326    
+SD     :     260       134         34,840      5,574      46          16,026    
+TN     :      35        55          1,925        732      90           1,733    
+TX     :     120        74          8,880      1,598      50           4,440    
+UT     :      35        48          1,680        336      54             907    
+VT     :       7        46            322        132      90             290    
+VA     :      25        48          1,200        120      48             576    
+WA     :      75        55          4,125        206      44           1,815    
+WV     :      21        41            861        207      82             706    
+WI     :      92        97          8,924      1,160      48           4,284    
+WY     :      39        74          2,886        520      53           1,530    
+       :                                                                        
+US 3/  :   3,316        71.0      235,436     34,090      50.3       118,424    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  U.S. price weighted by survey expanded      
+sales.  Total may not add due to rounding.                                      
+                                                                                
+                                                                                
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1988 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      42        42          1,764        247      61           1,076    
+AZ     :      80        49          3,920        706      49           1,921    
+AR     :      34        67          2,278        228      45           1,025    
+CA     :     600        40         24,000      2,160      49          11,760    
+CO     :      48        83          3,984        837      55           2,191    
+CT     :       2        46             92         29      99              91    
+DE     :       1        26             26          6      73              19    
+FL     :     240       105         25,200      2,385      51          12,852    
+GA     :     115        41          4,715        283      54           2,546    
+HI     :       9       179          1,611        806      43             693    
+ID     :     127        53          6,731      1,144      43           2,894    
+IL     :      28        69          1,932        638      76           1,468    
+IN     :      29        65          1,885        622      69           1,301    
+IA     :      49       129          6,321      1,580      47           2,971    
+KS     :      42        69          2,898        319      46           1,333    
+KY     :      12        40            480        202     106             509    
+LA     :      38        90          3,420        205      47           1,607    
+ME     :      14        26            364         44      72             262    
+MD     :       7        25            175         54      77             135    
+MA     :      15        18            270         41      97             262    
+MI     :      95        73          6,935      1,456      53           3,676    
+MN     :     160       129         20,640      2,064      43           8,875    
+MS     :      21        66          1,386         28      49             679    
+MO     :      30        80          2,400      1,008      61           1,464    
+MT     :     105        48          5,040        151      47           2,369    
+NE     :     113        96         10,848      1,410      45           4,882    
+NV     :       9        30            270         54      47             127    
+NH     :       1        34             34         16      96              33    
+NJ     :      30        31            930        353      84             781    
+NM     :      21        57          1,197        275      57             682    
+NY     :      94        59          5,546      1,109      70           3,882    
+NC     :      21        46            966        155      73             705    
+ND     :     250        66         16,500      1,650      43           7,095    
+OH     :      50        48          2,400        744      65           1,560    
+OK     :      10        55            550         66      73             402    
+OR     :      60        52          3,120        499      50           1,560    
+PA     :      45        46          2,070        683      67           1,387    
+RI     :       1        39             39         15     119              46    
+SC     :      14        40            560         90      61             342    
+SD     :     245        74         18,130      2,901      46           8,340    
+TN     :      35        40          1,400        462      75           1,050    
+TX     :     124        76          9,424        848      46           4,335    
+UT     :      36        41          1,476        384      61             900    
+VT     :       7        51            357        164      85             303    
+VA     :      25        56          1,400         56      40             560    
+WA     :      65        47          3,055        306      46           1,405    
+WV     :      30        35          1,050        630      75             788    
+WI     :     102        99         10,098      2,323      54           5,453    
+WY     :      39        71          2,769        249      52           1,440    
+       :                                                                        
+US 3/  :   3,370        66.1      222,757     32,685      50.0       111,379    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  U.S. price weighted by survey expanded      
+sales.  Total may not add due to rounding.                                      
+                                                                                
+                                                                                
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1989 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      41        20            820         33      54             443    
+AZ     :      78        45          3,510      1,158      55           1,931    
+AR     :      34        61          2,074        249      47             975    
+CA     :     620        34         21,080      3,162      49          10,329    
+CO     :      50        66          3,300        495      54           1,782    
+CT     :       2        40             80         48     105              84    
+DE     :       1        10             10          5     100              10    
+FL     :     250        60         15,000      1,050      48           7,200    
+GA     :     116        27          3,132        125      56           1,754    
+HI     :       9       135          1,215        510      45             547    
+ID     :     140        54          7,560      1,361      46           3,478    
+IL     :      29        38          1,102        452      78             860    
+IN     :      28        35            980        647      72             706    
+IA     :      67        90          6,030      1,448      45           2,714    
+KS     :      37        46          1,702        426      48             817    
+KY     :      12        29            348        132     108             376    
+LA     :      35        85          2,975        179      47           1,398    
+ME     :      17        24            408         41      77             314    
+MD     :       9        16            144         32      77             111    
+MA     :       8        23            184         50     139             256    
+MI     :     102        70          7,140      1,642      56           3,998    
+MN     :     165        92         15,180      3,492      45           6,831    
+MS     :      24        33            792         79      44             348    
+MO     :      33        62          2,046        696      56           1,146    
+MT     :     100        63          6,300        819      47           2,961    
+NE     :     119        62          7,378      1,476      46           3,394    
+NV     :      15        54            810        162      50             405    
+NH     :       1        35             35         11     143              50    
+NJ     :      25        23            575        265      69             397    
+NM     :      23        50          1,150        253      54             621    
+NY     :      94        59          5,546      1,664      55           3,050    
+NC     :      25        38            950        266      64             608    
+ND     :     310        56         17,360      1,215      47           8,159    
+OH     :      53        20          1,060        413      67             710    
+OK     :       9        65            585        164      87             509    
+OR     :      63        39          2,457        418      52           1,278    
+PA     :      41        39          1,599        560      62             991    
+RI     :       1        39             39         14     139              54    
+SC     :      15        19            285         74      67             191    
+SD     :     235        49         11,515      2,072      46           5,297    
+TN     :      25        25            625        250      74             463    
+TX     :     140        56          7,840      1,647      49           3,842    
+UT     :      47        44          2,068        579      54           1,117    
+VT     :       6        61            366        102      74             271    
+VA     :      23        20            460         97      54             248    
+WA     :      70        46          3,220        579      45           1,449    
+WV     :      32        44          1,408        732      77           1,084    
+WI     :     108        74          7,992      1,598      57           4,555    
+WY     :      41        47          1,927        250      49             944    
+       :                                                                        
+US 3/  :   3,528        51.2      180,634     33,192      49.8        89,956    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  U.S. price weighted by survey expanded      
+sales.  Total may not add due to rounding.                                      
+                                                                                
+                                                                                
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1990 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      29        38          1,102        143      55             606    
+AZ     :      67        48          3,216        836      49           1,576    
+AR     :      42        84          3,528        423      49           1,729    
+CA     :     480        42         20,160      2,218      54          10,886    
+CO     :      55        64          3,520        845      66           2,323    
+CT     :       2        52            104         47     130             135    
+DE     :       1        11             11          3     127              14    
+FL     :     220        95         20,900      1,881      48          10,032    
+GA     :     111        50          5,550        333      59           3,275    
+HI     :      10       157          1,570        314      47             738    
+ID     :     140        40          5,600        784      48           2,688    
+IL     :      23        40            920        543      73             672    
+IN     :      22        47          1,034        259      73             755    
+IA     :      70        54          3,780        945      53           2,003    
+KS     :      36        67          2,412        241      60           1,447    
+KY     :       8        44            352        127      92             324    
+LA     :      38        89          3,382        169      53           1,792    
+ME     :      20        24            480         77      64             307    
+MD     :       7        19            133         33      90             120    
+MA     :      15        13            195         43     129             252    
+MI     :     100        80          8,000      2,560      56           4,480    
+MN     :     170        74         12,580      1,384      49           6,164    
+MS     :      24        62          1,488        104      50             744    
+MO     :      30        63          1,890        567      57           1,077    
+MT     :      98        81          7,938      1,191      54           4,287    
+NE     :     118        56          6,608      1,189      49           3,238    
+NV     :      17        58            986        296      72             710    
+NH     :       1        54             54         19      85              46    
+NJ     :      15        21            315        107      90             284    
+NM     :      29        71          2,059        453      53           1,091    
+NY     :      81        54          4,374      1,094      65           2,843    
+NC     :      20        50          1,000        120      71             710    
+ND     :     220        82         18,040        722      52           9,381    
+OH     :      42        51          2,142        643      79           1,692    
+OK     :       9        50            450        149      78             351    
+OR     :      61        42          2,562        615      54           1,383    
+PA     :      41        28          1,148        379      67             769    
+RI     :       1        31             31          9     104              32    
+SC     :      12        41            492         49      69             339    
+SD     :     245        81         19,845      3,771      50           9,923    
+TN     :      19        33            627        138      99             621    
+TX     :     140        67          9,380      1,501      59           5,534    
+UT     :      47        37          1,739        539      56             974    
+VT     :       6        65            390        207      86             335    
+VA     :      16        34            544        207      95             517    
+WA     :      80        55          4,400        440      50           2,200    
+WV     :      30        30            900        594      89             801    
+WI     :     112        75          8,400      1,512      57           4,788    
+WY     :      40        57          2,280        274      52           1,186    
+       :                                                                        
+US 3/  :   3,220        61.7      198,674     31,093      53.7       106,688    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  U.S. price weighted by survey expanded      
+sales.  Total may not add due to rounding.                                      
+                                                                                
+                                                                                
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1991 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      23        24            552         66      63             348    
+AZ     :      75        50          3,750        750      53           1,988    
+AR     :      47        79          3,713        557      54           2,005    
+CA     :     550        63         34,650      3,465      54          18,711    
+CO     :      50        79          3,950        514      63           2,489    
+FL     :     225        83         18,675      1,307      53           9,898    
+GA     :     102        42          4,284        129      63           2,699    
+HI     :      10       131          1,310        328      57             747    
+ID     :     140        46          6,440      1,739      54           3,478    
+IL     :      21        52          1,092        393      79             863    
+IN     :      21        50          1,050        368      68             714    
+IA     :      70        59          4,130        909      57           2,354    
+KS     :      35        52          1,820        291      60           1,092    
+KY     :       7        25            175         88      96             168    
+LA     :      40        70          2,800        168      53           1,484    
+ME     :      13        42            546        213      69             377    
+MD     :       7        25            175         60     112             196    
+MI     :     105        73          7,665      2,683      57           4,369    
+MN     :     180        91         16,380      2,457      54           8,845    
+MS     :      28        36          1,008         71      52             524    
+MO     :      28        65          1,820        528      62           1,128    
+MT     :      86        92          7,912      1,187      57           4,510    
+NE     :     108        67          7,236      1,302      53           3,835    
+NV     :      15        54            810        275      78             632    
+NJ     :      11        31            341        130      92             314    
+NM     :      20        77          1,540        447      56             862    
+NY     :      77        62          4,774      1,337      62           2,960    
+NC     :      18        58          1,044        167      66             689    
+ND     :     215       103         22,145      3,100      54          11,958    
+OH     :      48        61          2,928        761      63           1,845    
+OK     :       9        70            630        252      85             536    
+OR     :      56        46          2,576        721      56           1,443    
+PA     :      40        45          1,800        594      70           1,260    
+SC     :      11        61            671        107      77             517    
+SD     :     225       101         22,725      4,091      54          12,272    
+TN     :      14        38            532        106      69             367    
+TX     :     140        78         10,920      1,201      54           5,897    
+UT     :      45        34          1,530        199      55             842    
+VT     :       6        75            450        198      80             360    
+VA     :      16        33            528         58      72             380    
+WA     :      85        42          3,570        678      57           2,035    
+WV     :      26        24            624        287      87             543    
+WI     :     110        67          7,370      1,843      56           4,127    
+WY     :      41        52          2,132        192      55           1,173    
+       :                                                                        
+Oth    :                                                                        
+ Sts 3/:      12        21            252        103     118             297    
+       :                                                                        
+US 4/  :   3,211        68.8      220,917     36,420      55.6       122,830    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  CT, DE, MA, NH, and RI not published        
+separately to avoid disclosing data for individual operations.  4/  U.S.        
+price weighted by survey expanded sales.  Total may not add due to rounding.    
+                                                                                
+                                                                                
+          Honey:  Number of Colonies, Yield, Production, Stocks, Price,         
+                  and Value by State and United States, 1992 1/                 
+--------------------------------------------------------------------------------
+       :   Honey   :   Yield   :           :          : Average  :    Value     
+ State : Producing :    per    :Production :  Stocks  :Price per :      of      
+       : Colonies  :  Colony   :           :Jan 15 2/ :  Pound   :  Production  
+--------------------------------------------------------------------------------
+       :   1,000      Pounds      -- 1,000 Pounds --     Cents    1,000 Dollars 
+       :                                                                        
+AL     :      25        41          1,025        113      59             605    
+AZ     :      70        54          3,780      1,285      55           2,079    
+AR     :      45        65          2,925        410      52           1,521    
+CA     :     490        67         32,830      4,268      52          17,072    
+CO     :      52        74          3,848        847      59           2,270    
+FL     :     220       104         22,880      2,517      53          12,126    
+GA     :      85        55          4,675        701      66           3,086    
+HI     :       9       138          1,242        460      54             671    
+ID     :     135        51          6,885      1,308      52           3,580    
+IL     :      16        53            848        237      88             746    
+IN     :      15        31            465        186      72             335    
+IA     :      65        62          4,030        766      57           2,297    
+KS     :      28        58          1,624        244      59             958    
+KY     :       4        30            120         54      74              89    
+LA     :      45       107          4,815        385      51           2,456    
+ME     :      15        22            330        122      77             254    
+MD     :       6        23            138         51      99             137    
+MI     :      95        68          6,460      2,067      59           3,811    
+MN     :     190        90         17,100      3,591      54           9,234    
+MS     :      25        65          1,625        163      51             829    
+MO     :      25        73          1,825        347      65           1,186    
+MT     :      87       110          9,570      1,818      55           5,264    
+NE     :      96        75          7,200        792      53           3,816    
+NV     :      15        65            975        341      85             829    
+NJ     :       8        22            176         48      91             160    
+NM     :      18        68          1,224        502      61             747    
+NY     :      70        66          4,620      1,802      61           2,818    
+NC     :      15        45            675         95      79             533    
+ND     :     240        91         21,840      2,184      53          11,575    
+OH     :      38        33          1,254        206      60             752    
+OK     :       9        52            468         80      74             346    
+OR     :      52        49          2,548        841      58           1,478    
+PA     :      30        41          1,230        566      71             873    
+SC     :      11        69            759         99      78             592    
+SD     :     240        85         20,400      3,264      53          10,812    
+TN     :       7        43            301         66      74             223    
+TX     :     125        85         10,625      1,488      52           5,525    
+UT     :      47        56          2,632        632      58           1,527    
+VT     :       6        63            378        200      75             284    
+VA     :      13        38            494         84      71             351    
+WA     :      80        44          3,520      1,197      58           2,042    
+WV     :      23        55          1,265        759      85           1,075    
+WI     :     105        66          6,930      1,525      58           4,019    
+WY     :      41        70          2,870        287      54           1,550    
+       :                                                                        
+Oth    :                                                                        
+ Sts 3/:       9        26            234         63      99             232    
+       :                                                                        
+US 4/  :   3,045        72.8      221,676     39,061      55.0       121,922    
+--------------------------------------------------------------------------------
+1/  For producers with 5 or more colonies.  2/  Stocks held by producers.  Does 
+not include stocks under loan.  3/  CT, DE, MA, NH, and RI not published        
+separately to avoid disclosing data for individual operations.  4/  U.S.        
+price weighted by survey expanded sales.  Total may not add due to rounding.    
+                                                                                
+
+The United States Department of Agriculture (USDA) prohibits discrimination in
+its programs on the basis of race, color, national origin, sex, religion, age,
+disability, political beliefs, and marital or familial status.  Persons with
+disabilities who require alternative means for communication of program
+information (braille, large print, audiotape, etc.) should contact the
+USDA Office of Communications at (202) 720-5881 (voice) or (202) 720-7808 (TDD).
+
+To file a complaint, write the Secretary of Agriculture, USDA, Washington, D.C.,
+20250, or call (202) 720-7327 (voice) or (202) 720-1127 (TDD).  USDA is an equal
+employment opportunity employer.
+
+
+Statistical Bulletins may be obtained in hard copy or on diskette by calling the
+ERS-NASS order desk toll free at, 1-800-999-6779 (weekdays 8:30 a.m.-5:00 p.m.
+ET) or by mail from ERS/NASS, 341 Victory Drive, Herndon VA 22070.
+
+
+Bulletins cost $10.00 each for paper products or diskettes.  The bulletins will
+also be available on Internet through the Mann Library at Cornell University
+(gopher usda.mannlib.cornell.edu 70).
+

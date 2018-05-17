@@ -1,0 +1,596 @@
+
+United States
+Department of
+Agriculture
+
+National
+Agricultural
+Statistics
+Service
+
+Statistical
+Bulletin
+Number 1039
+
+Honey
+Final 
+Estimates 
+2008-2012
+
+September 2014
+
+Contents
+   
+Honey Price by Color Class - United States: 2008 and 2009.........................................  4
+
+Honey Price by Color Class - United States: 2010 and 2011.........................................  4
+
+Honey Price by Color Class - United States: 2012..................................................  4
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and United States: 2008..  5
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and United States: 2009..  6
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and United States: 2010..  7
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and United States: 2011..  8
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and United States: 2012..  9
+
+Statistical Bulletin Publication Schedule......................................................... 10
+
+Information Contacts.............................................................................. 10
+
+Summary
+
+Honey: Final Estimates by State and United States, 2008-2012, U.S. Department 
+of Agriculture, Agricultural Statistics Board, National Agricultural 
+Statistics Service, Statistical Bulletin No. SB-1039.
+
+Introduction: This bulletin presents final estimates, including revisions 
+made by the Agricultural Statistics Board (ASB), for the production years 
+2008 through 2012. Honey producing colonies, yield per colony, honey 
+production, producer held stocks, price per pound, and value of production 
+were published in calendar years 2008-2012 in annual ASB reports. Data 
+included in this publication provide a historic record and benchmark for 
+current estimates.   
+
+Procedures: Revisions were made after a thorough review of the original 
+survey data and all additional data now available, including the 2012 Census 
+of Agriculture. The 2008-2012 estimates shown herein are considered final and 
+will not be revised again. Revisions to honey produced at the National level 
+are as follows:
+
+Pounds of honey produced
+Year	Previous	Final		Change
+	(1,000 pounds)	(1,000 pounds)	(percent)
+2008	163,789		163,789		-
+2009 	146,416		146,416		-
+2010	176,462		176,462		-
+2011	148,357		148,357		-
+2012	142,296		142,296		-
+- Represents zero.
+
+Historic Estimates: Final estimates of Honey Production in earlier years are 
+available in Statistical Bulletins No. 1025 for 2003-07, No. 992 for 1998-02, 
+No. 956a for 1993-97, No. 912 for 1986-92, No. 673 for 1976-79, No. 614 for 
+1970-75, No. 500 for 1965-69, and No. 388 for 1955-64. NASS estimates for 
+honey were not made for the years 1982-85. 
+
+Honey Price by Color Class - United States: 2008 and 2009
+[Prices for each color class and marketing channel are derived by weighting the quantities sold]
+-----------------------------------------------------------------------------------------------------------
+                                   :                                 Price                                 
+                                   :-----------------------------------------------------------------------
+            Color class            :   Co-op and private   :        Retail         :          All          
+                                   :-----------------------------------------------------------------------
+                                   :   2008    :   2009    :   2008    :   2009    :   2008    :   2009    
+-----------------------------------------------------------------------------------------------------------
+                                   :                            cents per pound                            
+                                   :                                                                       
+Water white, extra white, white ...:   138.9       142.6       195.0       252.6       141.2       144.0   
+                                   :                                                                       
+Extra light amber .................:   135.2       144.5       209.7       252.5       140.7       150.4   
+                                   :                                                                       
+Light amber, amber, dark amber ....:   127.4       135.1       240.5       291.4       142.0       148.2   
+                                   :                                                                       
+All other honey, area specialties .:   143.3       179.8       326.8       414.3       205.9       247.9   
+                                   :                                                                       
+All honey .........................:   135.4       141.5       224.7       283.7       142.1       147.3   
+-----------------------------------------------------------------------------------------------------------
+
+Honey Price by Color Class - United States: 2010 and 2011
+[Prices for each color class and marketing channel are derived by weighting the quantities sold]
+-----------------------------------------------------------------------------------------------------------
+                                   :                                 Price                                 
+                                   :-----------------------------------------------------------------------
+            Color class            :   Co-op and private   :        Retail         :          All          
+                                   :-----------------------------------------------------------------------
+                                   :   2010    :   2011    :   2010    :   2011    :   2010    :   2011    
+-----------------------------------------------------------------------------------------------------------
+                                   :                            cents per pound                            
+                                   :                                                                       
+Water white, extra white, white ...:   157.5       170.1       297.1       274.1       159.8       172.9   
+                                   :                                                                       
+Extra light amber .................:   151.1       164.4       266.3       307.1       157.6       171.1   
+                                   :                                                                       
+Light amber, amber, dark amber ....:   148.9       165.7       330.5       315.4       167.0       183.4   
+                                   :                                                                       
+All other honey, area specialties .:   172.1       182.6       471.4       461.0       208.1       225.2   
+                                   :                                                                       
+All honey .........................:   154.1       167.7       311.6       314.7       161.9       176.5   
+-----------------------------------------------------------------------------------------------------------
+
+Honey Price by Color Class - United States: 2012
+[Prices for each color class and marketing channel are derived by weighting the quantities sold]
+-----------------------------------------------------------------------------------------------------------
+                                   :                                 Price                                 
+                                   :-----------------------------------------------------------------------
+            Color class            :   Co-op and private   :        Retail         :          All          
+                                   :-----------------------------------------------------------------------
+                                   :         2012          :         2012          :         2012          
+-----------------------------------------------------------------------------------------------------------
+                                   :                            cents per pound                            
+                                   :                                                                       
+Water white, extra white, white ...:         192.3                   323.9                   194.2         
+                                   :                                                                       
+Extra light amber .................:         195.4                   303.5                   200.2         
+                                   :                                                                       
+Light amber, amber, dark amber ....:         183.0                   352.4                   205.8         
+                                   :                                                                       
+All other honey, area specialties .:         213.4                   519.5                   281.6         
+                                   :                                                                       
+All honey .........................:         191.3                   348.0                   199.2         
+-----------------------------------------------------------------------------------------------------------
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and
+United States: 2008
+[Producers with 5 or more colonies. Colonies which produced honey in more than one State were
+counted in each State]
+-----------------------------------------------------------------------------------------------
+                    :   Honey   :  Yield  :           :               : Average  :    Value    
+        State       : Producing :   per   :Production :    Stocks     :Price per :     of      
+                    :Colonies 1/: Colony  :           :December 15 2/ : Pound 3/ :Production 4/
+-----------------------------------------------------------------------------------------------
+                    :   1,000     pounds     --- 1,000 pounds ---        cents    1,000 dollars
+                    :                                                                          
+Alabama ............:       9      66            594          214        190           1,129   
+Arizona ............:      25      64          1,600          336        126           2,016   
+Arkansas ...........:      28      75          2,100          525        135           2,835   
+California .........:     360      51         18,360        4,039        139          25,520   
+Colorado ...........:      27      45          1,215          656        151           1,835   
+Florida ............:     150      79         11,850        1,304        132          15,642   
+Georgia ............:      65      71          4,615          369        152           7,015   
+Hawaii .............:      10      90            900          225        159           1,431   
+Idaho ..............:      90      40          3,600        1,440        146           5,256   
+Illinois ...........:       8      56            448          116        259           1,160   
+                    :                                                                          
+Indiana ............:       7      67            469          150        168             788   
+Iowa ...............:      24      62          1,488          580        158           2,351   
+Kansas .............:      10      61            610          128        155             946   
+Kentucky ...........:       4      39            156           27        244             381   
+Louisiana ..........:      40      77          3,080          493        136           4,189   
+Maine ..............:       7      42            294           79        157             462   
+Michigan ...........:      71      73          5,183        2,021        144           7,464   
+Minnesota ..........:     122      78          9,516        2,569        139          13,227   
+Mississippi ........:      14      98          1,372          110        130           1,784   
+Missouri ...........:      11      53            583          152        168             979   
+                    :                                                                          
+Montana ............:     134      70          9,380        4,596        137          12,851   
+Nebraska ...........:      36      67          2,412        1,254        145           3,497   
+Nevada .............:      10      29            290           52        142             412   
+New Jersey .........:       9      40            360          122        162             583   
+New Mexico .........:       6      48            288           95        148             426   
+New York ...........:      50      70          3,500        1,260        165           5,775   
+North Carolina .....:      12      52            624          137        218           1,360   
+North Dakota .......:     400      90         36,000        8,640        136          48,960   
+Ohio ...............:      14      53            742          371        168           1,247   
+Oregon .............:      50      43          2,150        1,097        141           3,032   
+                    :                                                                          
+Pennsylvania .......:      23      48          1,104          276        165           1,822   
+South Dakota .......:     225      95         21,375       11,970        134          28,643   
+Tennessee ..........:       7      61            427          149        209             892   
+Texas ..............:      77      64          4,928        1,380        134           6,604   
+Utah ...............:      28      48          1,344          242        157           2,110   
+Vermont ............:       5      66            330          119        220             726   
+Virginia ...........:       6      42            252           45        242             610   
+Washington .........:      49      44          2,156          862        151           3,256   
+West Virginia ......:       6      43            258           49        216             557   
+Wisconsin ..........:      58      80          4,640        2,366        150           6,960   
+Wyoming ............:      39      61          2,379          381        137           3,259   
+                    :                                                                          
+Other States 5/ 6/ .:      16      51            817          163        234           1,912   
+                    :                                                                          
+United States 6/ 7/ :   2,342      69.9      163,789       51,159        142.1       232,744   
+-----------------------------------------------------------------------------------------------
+1/ Honey producing colonies are the maximum number of colonies from which honey was taken      
+   during the year. It is possible to take honey from colonies which did not survive the entire
+   year.                                                                                       
+2/ Stocks held by producers.                                                                   
+3/ Average price per pound based on expanded sales.                                            
+4/ Value of production is equal to production multiplied by average price per pound.           
+5/ Connecticut, Delaware, Maryland, Massachusetts, New Hampshire, Oklahoma, Rhode Island, and  
+   South Carolina not published separately to avoid disclosing data for individual operations. 
+6/ Due to rounding, total colonies multiplied by total yield may not exactly equal production. 
+7/ United States value of production will not equal summation of States.                       
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and
+United States: 2009
+[Producers with 5 or more colonies. Colonies which produced honey in more than one State were
+counted in each State]
+-----------------------------------------------------------------------------------------------
+                    :   Honey   :  Yield  :           :               : Average  :    Value    
+        State       : Producing :   per   :Production :    Stocks     :Price per :     of      
+                    :Colonies 1/: Colony  :           :December 15 2/ : Pound 3/ :Production 4/
+-----------------------------------------------------------------------------------------------
+                    :   1,000     pounds     --- 1,000 pounds ---        cents    1,000 dollars
+                    :                                                                          
+Alabama ............:       9       50           450           68        186             837   
+Arizona ............:      20       52         1,040          562        145           1,508   
+Arkansas ...........:      24       57         1,368          301        142           1,943   
+California .........:     355       33        11,715        2,109        139          16,284   
+Colorado ...........:      28       53         1,484          326        143           2,122   
+Florida ............:     170       68        11,560        1,618        142          16,415   
+Georgia ............:      65       41         2,665          346        147           3,918   
+Hawaii .............:      10       95           950          323        176           1,672   
+Idaho ..............:     103       46         4,738        1,706        152           7,202   
+Illinois ...........:       8       34           272           57        255             694   
+                    :                                                                          
+Indiana ............:       9       32           288          101        202             582   
+Iowa ...............:      26       42         1,092          339        160           1,747   
+Kansas .............:       9       63           567          164        185           1,049   
+Kentucky ...........:       5       35           175           25        271             474   
+Louisiana ..........:      37      103         3,811          610        136           5,183   
+Maine ..............:       6       50           300           51        195             585   
+Michigan ...........:      66       60         3,960        1,505        155           6,138   
+Minnesota ..........:     122       65         7,930        1,427        144          11,419   
+Mississippi ........:      14      104         1,456           87        132           1,922   
+Missouri ...........:      11       47           517           57        199           1,029   
+                    :                                                                          
+Montana ............:     146       70        10,220        3,577        146          14,921   
+Nebraska ...........:      48       56         2,688        1,102        146           3,924   
+New Jersey .........:      11       32           352           70        236             831   
+New Mexico .........:       7       60           420          143        159             668   
+New York ...........:      45       65         2,925          936        193           5,645   
+North Carolina .....:      11       45           495           84        257           1,272   
+North Dakota .......:     450       77        34,650        7,623        138          47,817   
+Ohio ...............:      11       50           550          132        281           1,546   
+Oregon .............:      55       34         1,870          767        154           2,880   
+Pennsylvania .......:      21       40           840          319        203           1,705   
+                    :                                                                          
+South Dakota .......:     270       66        17,820        6,237        142          25,304   
+Tennessee ..........:       7       51           357           86        237             846   
+Texas ..............:      89       63         5,607        1,065        139           7,794   
+Utah ...............:      26       38           988          198        146           1,442   
+Vermont ............:       5       49           245           69        201             492   
+Virginia ...........:       6       39           234           56        345             807   
+Washington .........:      62       44         2,728        1,064        158           4,310   
+West Virginia ......:       5       37           185           33        260             481   
+Wisconsin ..........:      63       60         3,780        1,588        158           5,972   
+Wyoming ............:      37       48         1,776          391        143           2,540   
+                    :                                                                          
+Other States 5/ 6/ .:      26       52         1,348          194        237           3,195   
+                    :                                                                          
+United States 6/ 7/ :   2,498       58.6     146,416       37,516        147.3       215,671   
+-----------------------------------------------------------------------------------------------
+1/ Honey producing colonies are the maximum number of colonies from which honey was taken      
+   during the year. It is possible to take honey from colonies which did not survive the entire
+   year.                                                                                       
+2/ Stocks held by producers.                                                                   
+3/ Average price per pound based on expanded sales.                                            
+4/ Value of production is equal to production multiplied by average price per pound.           
+5/ Connecticut, Delaware, Maryland, Massachusetts, Nevada, New Hampshire, Oklahoma, Rhode      
+   Island, and South Carolina not published separately to avoid disclosing data for individual 
+   operations.                                                                                 
+6/ Due to rounding, total colonies multiplied by total yield may not exactly equal production. 
+7/ United States value of production will not equal summation of States.                       
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and
+United States: 2010
+[Producers with 5 or more colonies. Colonies which produced honey in more than one State were
+counted in each State]
+-----------------------------------------------------------------------------------------------
+                    :   Honey   :  Yield  :           :               : Average  :    Value    
+        State       : Producing :   per   :Production :    Stocks     :Price per :     of      
+                    :Colonies 1/: Colony  :           :December 15 2/ : Pound 3/ :Production 4/
+-----------------------------------------------------------------------------------------------
+                    :   1,000     pounds     --- 1,000 pounds ---        cents    1,000 dollars
+                    :                                                                          
+Alabama ............:       9      54            486           73        240           1,166   
+Arizona ............:      24      77          1,848          665        152           2,809   
+Arkansas ...........:      25      60          1,500          360        147           2,205   
+California .........:     410      67         27,470        6,318        155          42,579   
+Colorado ...........:      34      56          1,904          533        152           2,894   
+Florida ............:     200      69         13,800        1,794        156          21,528   
+Georgia ............:      55      46          2,530          152        167           4,225   
+Hawaii .............:      10      77            770          239        275           2,118   
+Idaho ..............:      97      27          2,619        1,179        161           4,217   
+Illinois ...........:       9      41            369           92        278           1,026   
+                    :                                                                          
+Indiana ............:      10      43            430          151        223             959   
+Iowa ...............:      27      49          1,323          463        192           2,540   
+Kansas .............:       9      52            468          103        202             945   
+Kentucky ...........:       5      67            335           67        272             911   
+Louisiana ..........:      36      80          2,880          288        150           4,320   
+Maine ..............:       5      41            205           33        205             420   
+Michigan ...........:      71      58          4,118        1,524        167           6,877   
+Minnesota ..........:     128      66          8,448        1,774        155          13,094   
+Mississippi ........:      16      98          1,568           78        144           2,258   
+Missouri ...........:      11      52            572           92        180           1,030   
+                    :                                                                          
+Montana ............:     157      74         11,618        2,905        158          18,356   
+Nebraska ...........:      41      55          2,255          902        151           3,405   
+New Jersey .........:      13      35            455           73        190             865   
+New Mexico .........:       7      66            462          157        158             730   
+New York ...........:      45      64          2,880        1,123        196           5,645   
+North Carolina .....:      13      46            598          144        266           1,591   
+North Dakota .......:     510      91         46,410       12,995        150          69,615   
+Ohio ...............:      18      62          1,116          346        228           2,544   
+Oregon .............:      59      39          2,301          874        163           3,751   
+Pennsylvania .......:      30      37          1,110          377        213           2,364   
+                    :                                                                          
+South Dakota .......:     265      58         15,370        4,765        151          23,209   
+Tennessee ..........:       8      63            504          106        250           1,260   
+Texas ..............:     100      72          7,200          792        151          10,872   
+Utah ...............:      26      30            780          195        153           1,193   
+Vermont ............:       4      65            260           73        310             806   
+Virginia ...........:       5      37            185           37        332             614   
+Washington .........:      71      37          2,627        1,077        157           4,124   
+West Virginia ......:       5      40            200           40        239             478   
+Wisconsin ..........:      64      64          4,096        1,556        168           6,881   
+Wyoming ............:      34      36          1,224          282        159           1,946   
+                    :                                                                          
+Other States 5/ 6/ .:      26      45          1,168          221        281           3,282   
+                    :                                                                          
+United States 6/ 7/ :   2,692      65.6      176,462       45,018        161.9       285,692   
+-----------------------------------------------------------------------------------------------
+1/ Honey producing colonies are the maximum number of colonies from which honey was taken      
+   during the year. It is possible to take honey from colonies which did not survive the entire
+   year.                                                                                       
+2/ Stocks held by producers.                                                                   
+3/ Average price per pound based on expanded sales.                                            
+4/ Value of production is equal to production multiplied by average price per pound.           
+5/ Alaska, Connecticut, Delaware, Maryland, Massachusetts, Nevada, New Hampshire, Oklahoma,    
+   Rhode Island, and South Carolina not published separately to avoid disclosing data for      
+   individual operations.                                                                      
+6/ Due to rounding, total colonies multiplied by total yield may not exactly equal production. 
+7/ United States value of production will not equal summation of States.                       
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and
+United States: 2011
+[Producers with 5 or more colonies. Colonies which produced honey in more than one State were
+counted in each State]
+-----------------------------------------------------------------------------------------------
+                    :   Honey   :  Yield  :           :               : Average  :    Value    
+        State       : Producing :   per   :Production :    Stocks     :Price per :     of      
+                    :Colonies 1/: Colony  :           :December 15 2/ : Pound 3/ :Production 4/
+-----------------------------------------------------------------------------------------------
+                    :   1,000     pounds     --- 1,000 pounds ---        cents    1,000 dollars
+                    :                                                                          
+Alabama ............:       9       50           450           63        251           1,130   
+Arizona ............:      23       53         1,219          427        155           1,889   
+Arkansas ...........:      22       64         1,408          239        162           2,281   
+California .........:     370       48        17,760        3,730        165          29,304   
+Colorado ...........:      31       55         1,705          443        200           3,410   
+Florida ............:     180       61        10,980          988        168          18,446   
+Georgia ............:      65       43         2,795          196        165           4,612   
+Hawaii .............:       9       74           666          246        365           2,431   
+Idaho ..............:      87       36         3,132        1,879        178           5,575   
+Illinois ...........:       7       50           350           98        390           1,365   
+                    :                                                                          
+Indiana ............:       8       51           408          147        214             873   
+Iowa ...............:      25       62         1,550          961        196           3,038   
+Kansas .............:       7       44           308          117        215             662   
+Kentucky ...........:       4       39           156           12        317             495   
+Louisiana ..........:      36       77         2,772          471        167           4,629   
+Maine ..............:       4       30           120           17        198             238   
+Michigan ...........:      74       64         4,736        2,084        181           8,572   
+Minnesota ..........:     120       53         6,360        2,099        163          10,367   
+Mississippi ........:      18      115         2,070          104        153           3,167   
+Missouri ...........:       8       43           344           76        214             736   
+                    :                                                                          
+Montana ............:     145       92        13,340        3,202        170          22,678   
+Nebraska ...........:      41       59         2,419          653        175           4,233   
+New Jersey .........:      11       41           451          135        370           1,669   
+New Mexico .........:       7       56           392          153        169             662   
+New York ...........:      49       56         2,744        1,235        196           5,378   
+North Carolina .....:      14       62           868           95        283           2,456   
+North Dakota .......:     460       71        32,660        7,512        167          54,542   
+Ohio ...............:      15       66           990          228        234           2,317   
+Oregon .............:      60       34         2,040          755        168           3,427   
+Pennsylvania .......:      24       44         1,056          306        255           2,693   
+                    :                                                                          
+South Dakota .......:     250       66        16,500        4,290        170          28,050   
+Tennessee ..........:       7       44           308           68        293             902   
+Texas ..............:      78       58         4,524          633        178           8,053   
+Utah ...............:      23       39           897          170        175           1,570   
+Vermont ............:       4       43           172           43        231             397   
+Virginia ...........:       4       40           160           21        407             651   
+Washington .........:      71       38         2,698          836        193           5,207   
+West Virginia ......:       4       53           212           45        257             545   
+Wisconsin ..........:      57       63         3,591        1,508        189           6,787   
+Wyoming ............:      35       54         1,890          265        172           3,251   
+                    :                                                                          
+Other States 5/ 6/ .:      25       46         1,156          211        299           3,456   
+                    :                                                                          
+United States 6/ 7/ :   2,491       59.6     148,357       36,761        176.5       261,850   
+-----------------------------------------------------------------------------------------------
+1/ Honey producing colonies are the maximum number of colonies from which honey was taken      
+   during the year. It is possible to take honey from colonies which did not survive the entire
+   year.                                                                                       
+2/ Stocks held by producers.                                                                   
+3/ Average price per pound based on expanded sales.                                            
+4/ Value of production is equal to production multiplied by average price per pound.           
+5/ Alaska, Connecticut, Delaware, Maryland, Massachusetts, Nevada, New Hampshire, Oklahoma,    
+   Rhode Island, and South Carolina not published separately to avoid disclosing data for      
+   individual operations.                                                                      
+6/ Due to rounding, total colonies multiplied by total yield may not exactly equal production. 
+7/ United States value of production will not equal summation of States.                       
+
+Number of Colonies, Yield, Production, Stocks, Price, and Value - States and
+United States: 2012
+[Producers with 5 or more colonies. Colonies which produced honey in more than one State were
+counted in each State]
+-----------------------------------------------------------------------------------------------
+                    :   Honey   :  Yield  :           :               : Average  :    Value    
+        State       : Producing :   per   :Production :    Stocks     :Price per :     of      
+                    :Colonies 1/: Colony  :           :December 15 2/ : Pound 3/ :Production 4/
+-----------------------------------------------------------------------------------------------
+                    :   1,000     pounds     --- 1,000 pounds ---        cents    1,000 dollars
+                    :                                                                          
+Alabama ............:       8       54           432           65        247           1,067   
+Arizona ............:      22       46         1,012          253        179           1,811   
+Arkansas ...........:      25       63         1,575          189        198           3,119   
+California .........:     330       35        11,550        3,119        194          22,407   
+Colorado ...........:      25       48         1,200          468        207           2,484   
+Florida ............:     193       64        12,352        1,235        184          22,728   
+Georgia ............:      59       51         3,009          181        192           5,777   
+Hawaii .............:      10       75           750          263        415           3,113   
+Idaho ..............:      92       32         2,944          530        163           4,799   
+Illinois ...........:       7       61           427          145        355           1,516   
+                    :                                                                          
+Indiana ............:       8       59           472          203        254           1,199   
+Iowa ...............:      37       61         2,257        1,196        217           4,898   
+Kansas .............:       6       55           330          125        228             752   
+Kentucky ...........:       5       51           255           41        315             803   
+Louisiana ..........:      41       86         3,526          141        183           6,453   
+Maine ..............:       4       34           136           24        239             325   
+Michigan ...........:      73       57         4,161        1,332        203           8,447   
+Minnesota ..........:     125       67         8,375        1,591        192          16,080   
+Mississippi ........:      18      118         2,124           64        177           3,759   
+Missouri ...........:       7       53           371          108        280           1,039   
+                    :                                                                          
+Montana ............:     145       52         7,540        2,413        195          14,703   
+Nebraska ...........:      43       65         2,795        1,146        193           5,394   
+New Jersey .........:      14       33           462           51        197             910   
+New Mexico .........:       5       52           260           99        339             881   
+New York ...........:      51       51         2,601          988        223           5,800   
+North Carolina .....:      13       39           507          106        376           1,906   
+North Dakota .......:     480       69        33,120        5,962        192          63,590   
+Ohio ...............:      18       60         1,080          410        246           2,657   
+Oregon .............:      60       32         1,920          845        216           4,147   
+Pennsylvania .......:      16       60           960          269        257           2,467   
+                    :                                                                          
+South Dakota .......:     260       63        16,380        3,604        195          31,941   
+Tennessee ..........:       6       61           366           59        293           1,072   
+Texas ..............:      92       52         4,784          718        200           9,568   
+Utah ...............:      25       38           950          209        187           1,777   
+Vermont ............:       4       60           240           53        239             574   
+Virginia ...........:       4       41           164           23        377             618   
+Washington .........:      62       41         2,542        1,017        238           6,050   
+West Virginia ......:       6       48           288           95        291             838   
+Wisconsin ..........:      60       69         4,140        1,863        205           8,487   
+Wyoming ............:      50       51         2,550          459        187           4,769   
+                    :                                                                          
+Other States 5/ 6/ .:      30       46         1,389          167        311           4,320   
+                    :                                                                          
+United States 6/ 7/ :   2,539       56.0     142,296       31,829        199.2       283,454   
+-----------------------------------------------------------------------------------------------
+1/ Honey producing colonies are the maximum number of colonies from which honey was taken      
+   during the year. It is possible to take honey from colonies which did not survive the entire
+   year.                                                                                       
+2/ Stocks held by producers.                                                                   
+3/ Average price per pound based on expanded sales.                                            
+4/ Value of production is equal to production multiplied by average price per pound.           
+5/ Alaska, Connecticut, Delaware, Maryland, Massachusetts, Nevada, New Hampshire, Oklahoma,    
+   Rhode Island, and South Carolina not published separately to avoid disclosing data for      
+   individual operations.                                                                      
+6/ Due to rounding, total colonies multiplied by total yield may not exactly equal production. 
+7/ United States value of production will not equal summation of States.                       
+
+Statistical Bulletin Publication Schedule
+
+Statistical Bulletins (SB): The National Agricultural Statistics Service will 
+issue a series of nineteen bulletins containing final estimates for 
+agricultural data series based on the review of the 2012 Census of 
+Agriculture and other information. The product number, bulletin title, and 
+tentative release dates are as follows.
+
+SB1030	Farms and Land in Farms - Final Estimates 2008-2012	05/28/14
+SB1031	Agricultural Land Values - Final Estimates 2009-2013	06/19/14
+SB1032	Citrus Fruits - Final Estimates 2008-2012	08/26/14	
+SB1033	Vegetables - Final Estimates 2008-2012	08/26/14
+SB1034	Cattle - Final Estimates 2009-2013	09/04/14	
+SB1035	Hogs and Pigs - Final Estimates 2008-2012	09/04/14
+SB1036	Milk Cows and Production - Final Estimates 2008-2012	09/04/14
+SB1037	Sheep and Goats - Final Estimates 2009-2013	09/04/14
+SB1038	Chickens and Eggs - Final Estimates 2008-2012	09/04/14	
+SB1039	Honey - Final Estimates 2008-2012	09/04/14
+SB1040	Meat Animals, PDI - Final Estimates 2008-2012	10/29/14
+SB1041	Milk Disposition and Income - Final Estimates 2008-2012	10/29/14
+SB1042	Poultry Production and Value - Final Estimates 2008-2012	10/29/14
+SB1043	Noncitrus Fruits and Nuts - Final Estimates 2008-2012	10/30/14
+SB1044	Field Crops - Final Estimates 2008-2012	11/03/14
+SB1045	Rice Stocks - Final Estimates 2008-2013	11/03/14	
+SB1046	Stocks of Grains, Oilseeds, and Hay - Final Estimates 2008-2013	11/03/14	
+SB1047	Potatoes and Sweet Potatoes - Final Estimates 2008-2012	11/03/14
+SB1048	Crop Values - Final Estimates 2008-2012	11/03/14
+
+Agricultural Census Publications: The U. S. Department of Agriculture's 
+National Agricultural Statistics Service (NASS) released several products 
+from the 2012 Census of Agriculture on May 2, 2014. The Census is the leading 
+source of statistics about the Nation's agricultural production and the only 
+source of consistent, comparable data at the county, State, and national 
+levels. The Census includes all places from which $1,000 or more of 
+agricultural products, including government payments, were produced and sold, 
+or normally would have been sold, during the census year. Census publications 
+also include demographic items such as sex of operator, residence on or off 
+the farm, days worked off farm, years present on farm, age group categories, 
+race, and number of persons living in each household.  
+	
+	
+
+Information Contacts
+
+Listed below are the commodity specialists in the Livestock Branch of the National 
+Agricultural Statistics Service to contact for additional information. E-mail inquiries 
+may be sent to nass@nass.usda.gov
+
+Dan Kerestes, Chief, Livestock Branch .................................. (202) 720-3570
+
+Bruce Boess, Head, Poultry and Specialty Commodities Section ........... (202) 720-4447
+   Alissa Cowell-Mytar - Cold Storage................................... (202) 720-4751
+   Heidi Gleich - Broiler Hatchery, Chicken Hatchery.................... (202) 720-0585
+   Michael Klamm - Poultry Slaughter, Turkey Hatchery, Turkeys Raised .. (202) 690-3237
+   Tom Kruchten - Census of Aquaculture, Mink, Trout Production......... (202) 690-4870
+   Kim Linonis - Layers, Eggs .......................................... (202) 690-8632
+   Joshua O'Rear - Catfish Production, Honey ........................... (202) 690-3676
+   Vacant - Egg Products ............................................... (202) 720-3570
+
+Access to NASS Reports
+
+For your convenience, you may access NASS reports and products the following 
+ways:
+
+ 	All reports are available electronically, at no cost, on the NASS web 
+site: http://www.nass.usda.gov.
+
+ 	Both national and state specific reports are available via a free e-
+mail subscription. To set-up this free subscription, visit 
+http://www.nass.usda.gov and in the "Follow NASS" box under "Receive 
+reports by Email," click on "National" or "State" to select the reports 
+you would like to receive. 
+
+For more information on NASS surveys and reports, call the NASS Agricultural 
+Statistics Hotline at (800) 727-9540, 7:30 a.m. to 4:00 p.m. ET, or e-mail: 
+nass@nass.usda.gov. 
+  
+The U.S. Department of Agriculture (USDA) prohibits discrimination against 
+its customers, employees, and applicants for employment on the bases of race, 
+color, national origin, age, disability, sex, gender identity, religion, 
+reprisal, and where applicable, political beliefs, marital status, familial 
+or parental status, sexual orientation, or all or part of an individual's 
+income is derived from any public assistance program, or protected genetic 
+information in employment or in any program or activity conducted or funded 
+by the Department. (Not all prohibited bases will apply to all programs 
+and/or employment activities.) 
+If you wish to file a Civil Rights program complaint of discrimination, 
+complete the USDA Program Discrimination Complaint Form (PDF), found online 
+at http://www.ascr.usda.gov/complaint_filing_cust.html, or at any USDA 
+office, or call (866) 632-9992 to request the form. You may also write a 
+letter containing all of the information requested in the form. Send your 
+completed complaint form or letter to us by mail at U.S. Department of 
+Agriculture, Director, Office of Adjudication, 1400 Independence Avenue, 
+S.W., Washington, D.C. 20250-9410, by fax (202) 690-7442 or e-mail at 
+program.intake@usda.gov. 
+
