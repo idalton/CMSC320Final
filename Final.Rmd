@@ -83,6 +83,7 @@ headers <- c(
 
 
 abbr_to_name <- setNames(state.name,state.abb)
+name_to_abbr <- setNames(state.abb,state.name)
 
 ```
 
@@ -98,10 +99,6 @@ I want data for all 50 states and there is data from every state except Alaska w
 For now, I will not be including this data. I only want to use state specific data and I dont think there is much benefit in taking the effort to include this data.
 
 
-`TODO`
-what to do about HI and AK alaska
-only contigous 48?
-aka average
 
 **Scraping Data from 1986-2007**  
 
@@ -112,16 +109,12 @@ A couple notes about the file format and how I approached scraping the data befo
 - All the tables end with data from Wyoming (WY)
 - the table order corresponds to the year order for each file  
 
-The `gethoneydatav1`is the data scraping function (`v1` because we will need `v2` for the last file).
+The `gethoneydata`is the data scraping function.
 Given the output of `read_lines`, it finds all the start and end indices of each table, creates a string vector of all the lines of the table, makes each entry space delimited then adds it to a dataframe. The return value of the function is a dataframe that contains the data from each table in the file with an added column indicating the year for that data. The function also takes a `year` value which stands in as the base number to add onto the index to create the year colunms.
 
 ```{r GetDataFuntion}
 
-alaska <- data_frame() %>%
-  rbind(c("AK",rep("0",7))) %>%
-  setNames(headers)
-# names(alaska) <- headers
-gethoneydatav1 <- function(text,year) {
+gethoneydata <- function(text,year) {
    # there is a space there because apparently one of the files has
   # the string "AL" which was messing up the grep search
   start_lines <- c(grep("AL ",text))
@@ -142,6 +135,7 @@ gethoneydatav1 <- function(text,year) {
       data_frame() %>%
       # split on that space delmiter and give the columns nice names
       separate(1,sep = " ",headers, extra="drop") %>% 
+      rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
       # add a column for the year this data belongs two
       mutate(year = rep(as.integer(year+index))) %>%
       # most of the data now is chars and groped units (i.e. 1000s pounds etc)
@@ -153,7 +147,9 @@ gethoneydatav1 <- function(text,year) {
       mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
       mutate(value = as.numeric(gsub(",","",value))*1000)
     
-      
+      # table <- if_else(str_detect(table$state,"Sts"),fillmissingstates(table),table)
+    # if (str_detect(table$state,"Sts"))  print(index)
+    
     # here I rearrange the columns such that the year value comes right after the state.abb
     # I just do this because I think it makes it look slightly better.
     table <- table[c(1,8,2,3,4,5,6,7)]
@@ -164,6 +160,51 @@ gethoneydatav1 <- function(text,year) {
   #return the accumlated data frame
   df
 }
+
+fillmissingstatesv1 <- function(table) {
+  # figure out which states are not present
+    states_not_present <- state.abb[! state.abb %in% table$state]
+    # find the number of states that are not present
+    num_states_not_present <- length(states_not_present)
+    # extract the aggregated other states  table values without the bogus state name
+    other_state_vals <- subset(table, str_detect(table$state,"Sts"))[-1]
+    # we only want the data colunms so we can drop the first column
+    # and then we want the other cols to be divided by the number of states they are summed from
+    # except for yieldpercol and avg price
+    other_state_vals[1,1] <- round(other_state_vals[1,1]/num_states_not_present)
+    other_state_vals[1,3] <- round(other_state_vals[1,3]/num_states_not_present)
+    other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
+    other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
+    
+    other <- cbind(states_not_present,other_state_vals)
+    colnames(other)[1] <- "state"
+  
+    table <- table %>% rbind(other) %>%
+      filter(!str_detect(state,"Sts"))
+}
+
+fillmissingstatesv2 <- function(table) {
+  # figure out which states are not present
+    states_not_present <- state.name[! state.name %in% table$state]
+    # find the number of states that are not present
+    num_states_not_present <- length(states_not_present)
+    # extract the aggregated other states  table values without the bogus state name
+    other_state_vals <- subset(table, str_detect(table$state,"States"))[-1]
+    # we only want the data colunms so we can drop the first column
+    # and then we want the other cols to be divided by the number of states they are summed from
+    # except for yieldpercol and avg price
+    other_state_vals[1,1] <- round(other_state_vals[1,1]/num_states_not_present)
+    other_state_vals[1,3] <- round(other_state_vals[1,3]/num_states_not_present)
+    other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
+    other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
+    
+    other <- cbind(states_not_present,other_state_vals)
+    colnames(other)[1] <- "state"
+  
+    table <- table %>% rbind(other) %>%
+      filter(!str_detect(state,"States"))
+}
+
 ```
 
 Now its time to read in the text files and let the function do its job.  
@@ -181,21 +222,94 @@ honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
 masterhoneydf = NULL
 
 masterhoneydf <- masterhoneydf %>%
-  rbind(gethoneydatav1(honey_1986_1992,1985)) %>%
-  rbind(gethoneydatav1(honey_1993_1997,1992)) %>%
-  rbind(gethoneydatav1(honey_1998_2002,1997)) %>%
-  rbind(gethoneydatav1(honey_2003_2007,2002))
+  rbind(gethoneydata(honey_1986_1992,1985)) %>%
+  rbind(gethoneydata(honey_1993_1997,1992)) %>%
+  rbind(gethoneydata(honey_1998_2002,1997)) %>%
+  rbind(gethoneydata(honey_2003_2007,2002))
 
-honey_1986_1992df <- gethoneydatav1(honey_1986_1992,1985)
-honey_1993_1997df <- gethoneydatav1(honey_1993_1997,1992)
-honey_1998_2002df <- gethoneydatav1(honey_1998_2002,1997)
-honey_2003_2007df <- gethoneydatav1(honey_2003_2007,2002)
+honey_1986_1992df <- gethoneydata(honey_1986_1992,1985)
+honey_1993_1997df <- gethoneydata(honey_1993_1997,1992)
+honey_1998_2002df <- gethoneydata(honey_1998_2002,1997)
+honey_2003_2007df <- gethoneydata(honey_2003_2007,2002)
 
 
 
 ```
 
+```{r test}
 
+text <- read_lines ("HoneyData_1986-1992.txt")
+
+ # there is a space there because apparently one of the files has
+  # the string "AL" which was messing up the grep search
+  start_lines <- c(grep("AL ",text))
+  # I included the space here as well just to be safe
+  end_lines <- c(grep("WY ",text))
+  othersts_lines <- c(grep("Sts",text))  
+  
+  df = NULL # intializing the accumlator data frame
+  # for each table found in the text file
+  for (index in 1:length(start_lines)){
+    
+    table <- text[start_lines[index]:end_lines[index]]
+    
+    bool <- ((end_lines[index]+3) %in% othersts_lines)
+    # since we have index bounds of the table we can grab the lines that make up the table
+    if(bool) table <- text[start_lines[index]:(end_lines[index]+3)]
+    
+    #then we throe the line character vectors through the pipeline
+    table <- table %>%
+      str_replace_all("/", " ") %>%         # remove any '/' characters
+      str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
+      data_frame() %>%
+      # split on that space delmiter and give the columns nice names
+      separate(1,sep = " : ",c("state","data"), extra="drop") %>% #separate first on the semicolon
+      separate(2,sep = " ",headers[-1], extra="drop") %>%
+      rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
+      # remove any lines with na
+      drop_na() %>%
+      # add a column for the year this data belongs two
+      mutate(year = rep(as.integer(3+index))) %>%
+      # most of the data now is chars and groped units (i.e. 1000s pounds etc)
+      # the gsub calls are needed to prevent the ","s from messing up as.numeric
+      mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
+      mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
+      mutate(production = as.numeric(gsub(",","",production))*1000) %>%
+      mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
+      mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
+      mutate(value = as.numeric(gsub(",","",value))*1000)
+
+    if (bool)  table <- fillmissingstatesv1(table)
+
+    table <- table[c(1,8,2,3,4,5,6,7)]
+
+    # df = rbind(df,table)
+  }
+  # df
+  table
+
+  
+      #   separate(2,sep = " ",headers[-1], extra="drop") %>%
+      # rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
+      # # remove any lines with na
+      # # drop_na() %>%
+      # # add a column for the year this data belongs two
+      # mutate(year = rep(as.integer(3+index))) %>%
+      # # most of the data now is chars and groped units (i.e. 1000s pounds etc)
+      # # the gsub calls are needed to prevent the ","s from messing up as.numeric
+      # mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
+      # mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
+      # mutate(production = as.numeric(gsub(",","",production))*1000) %>%
+      # mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
+      # mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
+      # mutate(value = as.numeric(gsub(",","",value))*1000)
+
+      # table <- if_else(str_detect(table$state,"Sts"),fillmissingstates(table),table)
+    # if (str_detect(table$state,"Sts"))  table <- fillmissingstates(table)
+
+    # table <- table[c(1,8,2,3,4,5,6,7)]
+
+```
 
 
 **Scraping Data from 2008-2012**  
@@ -207,6 +321,8 @@ since there is only one file we wont need to make a function we can just use a p
 There are two problems with the tables in this file
   - some state names have spaces so we need to be careful when splitting on spaces
   - there are some blank lines in the tables that need to be removed
+  
+Also in order to keep this data frame consistent with the previous ones i will translate the full state names into their respective two letter abbreviation.
 ```{r anotherone}
 
 text <- read_lines("HoneyData_2008-2012.txt")
@@ -240,7 +356,6 @@ for (index in 1:length(start_lines)){
       mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
       mutate(value = as.numeric(gsub(",","",value))*1000)
     
-    
     # figure out which states are not present
     states_not_present <- state.name[! state.name %in% table$state]
     # find the number of states that are not present
@@ -261,8 +376,9 @@ for (index in 1:length(start_lines)){
     table <- table %>% rbind(other) %>%
       filter(!str_detect(state,"State")) %>%
       # add a column for the year this data belongs two
-      mutate(year = rep(as.integer(2007+index)))
-
+      mutate(year = rep(as.integer(2007+index))) %>%
+      # changing the state name back to abbreviations 
+      mutate(state = name_to_abbr[state])
     
     # # here I rearrange the columns such that the year value comes right after the state.abb
     # # I just do this because I think it makes it look slightly better.
@@ -272,9 +388,6 @@ for (index in 1:length(start_lines)){
     honey_2008_2012df = rbind(honey_2008_2012df,table)
   }
 honey_2008_2012df
-
-test <- state.name[! state.name %in% table$state]  
-test
 
 ```
 
@@ -293,7 +406,7 @@ lets make some nice plots that visualize some of the data we scraped.
 
 
 
-### plot 1 : UNTITLED
+###Number of Honey Colonies over Time
 
 ```{r plot1}
 masterhoneydf %>%
@@ -305,10 +418,21 @@ masterhoneydf %>%
 
 ```
 
+
+### Honey Production over Time
 another chart that shows the change in production
+```{r prod}
+masterhoneydf %>%
+  ggplot(aes(x=year,y=production,group=factor(state))) +
+  # color is a particular hex value for "honey" I found online
+  geom_line(color="#f9c901", alpha=3/4, size=3/4) + 
+  labs(title="Honey production in States over Time",
+          x="Year", y="Honey Production")
+```
+###Number of Honey Colonies in Each State
 
-### plot 2 : UNTITLED
-
+There are multiple ways to show this. I will avaerage the number of colonies for each state each year and then dsplay the numbers on a bar plot. This will show which states have the most bee colonies as well as the distibution of bee colonies over the fifty states.
+**Bar Plot**
 ```{r plot2v1}
 masterhoneydf %>%
   group_by(state) %>%
@@ -316,15 +440,13 @@ masterhoneydf %>%
   arrange(avg) %>%
   ggplot(aes(x=state,y=avg)) +
   geom_bar(stat="identity",fill="#f9c901") +
-  labs(title="Number of Honey Colonies in Each States ",
+  labs(title="Number of Honey Colonies in Each State",
           x="State", y="Number of Colonies")
 
 ```
 
-**Plot 2 Continued**  
-
-lets revise the r code to show the values in order using `reorder`.
-
+This chart does not look very nice as the values are not in order. lets revise the r code to show the values in order using `reorder`.
+**Bar Plot Revised**
 ```{r plot2v2}
 masterhoneydf %>%
   group_by(state) %>%
@@ -337,53 +459,49 @@ masterhoneydf %>%
 ```
 
 
-### plot 3 : UNTITLED
+### plot 3 : United States 
+Another cool thing we can do this data is to plot values onto a map of the united states. There is a conveient R package that provides an easy way to do this. It is `fiftystater`. It has a map object that can be passed into `geom_map` and so long as you provide a `map_id` connecting each peice of data with a particular state then ggplot can make a nice looking map like the one below.
 
 ```{r fiftstates}
 library(fiftystater)
 
-crimes <- data.frame(state = tolower(rownames(USArrests)), USArrests)
-
-# map_id creates the aesthetic mapping to the state name column in your data
-p <- ggplot(crimes, aes(map_id = state)) + 
-  # map points to the fifty_states shape data
-  geom_map(aes(fill = Assault), map = fifty_states) + 
-  expand_limits(x = fifty_states$long, y = fifty_states$lat) +
-  coord_map() 
-  
+# summarizing the honyey data frame 
 masterhoneydf %>%
   group_by(state) %>%
   summarize(avg_numcol = mean(numcolonies)) %>%
-
-ggplot(aes(map_id = str_to_lower(abbr_to_name[state]))) + 
-  # map points to the fifty_states shape data
+  # making the call to ggplot
+  ggplot(aes(map_id = str_to_lower(abbr_to_name[state]))) + 
   geom_map(aes(fill = avg_numcol), map = fifty_states) + 
   expand_limits(x = fifty_states$long, y = fifty_states$lat) +
+  # insert a honey colored gradient
   scale_fill_gradient(low="#ffffe5", high= "#f9c901", guide = "colorbar", name = "Number of Colonies",labels = NULL) +
   coord_map() +
+  # lines below are there to make the map look even nicer
   scale_x_continuous(breaks = NULL) +
   scale_y_continuous(breaks = NULL) +
-  labs(x = "", y = "") +
+  labs(x = "", y = "") + # removes labels
   theme(legend.position = "bottom",
-        panel.background = element_blank())
+        panel.background = element_blank()) #removes background panel
 
+```
 
+However, to get the above map I just calculated the average number of colonies over all years for each state. This does not show any change over time. One way we can do this is to facet the data and show mulitple charts together each displaying data from different time periods. To show this I will facet the data based on the set of years used in each text file which will yield 5 maps you can see in the grid below.
 
+```{r mapfacet}
 
 ```
 
 facet every five years
 
+When looking at charts in our data we should be looking for interesting insights as well as any problems we can see. Ideally we should be thinking about questions like:
 what do these plots show us?
-are there any peculirarites in the data that we need to address?
-and interesting insights that may have been discovered
+Are there any peculiarites in the data that we need to address?
+Are there any interesting insights that may have been discovered?
 
-## Hyothesis Testing
-My hypothesis is I will probably not finish this in time
-
+From the charts we can see that Califournia is the honey production powerhouse of the United States. More importantly if we looked the number of honey colonies over time we can see a decline in the number of colonies. This is most likely casued by [Colony Collapse Disorder](https://en.wikipedia.org/wiki/Colony_collapse_disorder) which in the past years has become a significant population for bees.
 
 ##Machine Learning
-In this section I will show how to create a prediction with the given data. Particularly, the model will predict the whether the change of number of colonies will go up or down. In this paritcular example we will try to predict the change in number of colonies in 2012 using all the data prior to 2012 (1986-2011). In order to do this we will need to create a data frame that has the result we are looking for.
+In this section I will show how to create a prediction model with the given data. Particularly, the model will predict the whether the change of number of colonies will go up or down. In this paritcular example we will try to predict the change in number of colonies in 2012 using all the data prior to 2012 (1986-2011). In order to do this we will need to create a data frame that has the result we are looking for.
 
 ###Setup
 This new outcome dataframe needs to...
@@ -402,10 +520,9 @@ I will make use of a random forest to make the model...
 
 
 ###Testing
-To test this model we would use a k-fold valdidation technique. Unfortunately I was unable to complete this section in time to submit the project Im sorry to let you down. If you like to learn more about k-fold validiation I recommend checking out this site and this set of lecture slides from my Intro to data science course
+To test this model we would use a k-fold cross valdidation technique. Unfortunately I was unable to complete this section in time. Im sorry to let you down. If you like to learn more about k-fold cross validiation I recommend checking out this site and this set of lecture slides from my Intro to data science course
 
 ##Conclusion
 
-`This was nice wasnt it.`
 We learned how to scrape data from text files, how to handle missing data. We saw how to make graphs that can intuitively show the data and how attributes relate to one another. We were also able to make a map that that can show the data geographically which is not always possible in some datasets
 
