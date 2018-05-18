@@ -6,39 +6,15 @@ output:
   html_document: 
     toc: yes
 knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_file = file.path(dirname(inputFile), 'index.html')) })
-citecolor: gold
-urlcolor: gold
 ---
 
 ```{r libs, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE,fig.width=12, fig.height=7)
-
-library(data.table)
-library(dplyr)
-library(ggplot2)
-library(stringr)
-library(DT)
-library(tidyr)
-library(readr)
-library(leaflet)
-library(lubridate)
 ```
 
-
-
-
-walk users through the entire data science pipeline:  
-- data curation,  
-- parsing, and management  
-- exploratory data analysis  
-- hypothesis testing and
-- machine learning to provide analysis  
-- and then the curation of a message or messages covering insights learned during the tutorial.  
-
-
 ## Introduction  
-Do you like Bees? I dont like bees, but I do like honey and bee plant pollination. Bees are incredibly important for agriculture because the plant pollination they provide. A large portion of the food people eat comes from plants that have been pollinated by bees. Without the pollination bees provide, food producing plants In recent years bee colonies were in decline for a number of mysterious reasons. Things seem to be improving and there are significant efforts to solve the problems dealing with the decline. If you are interested in learning more you can do so [here](https://thehoneybeeconservancy.org/2017/06/22/honey-bees-heroes-planet/).
-The current bee situation prevents an interesting oppurtunity to dive into the data science pipeline with Honey data taken from the National Agricultural Statistics Service.
+Do you like Bees? I dont like bees, but I do like honey and bee plant pollination. Bees are incredibly important for agriculture because the plant pollination they provide. A large portion of the food people eat comes from plants that have been pollinated by bees. In recent years bee colonies were in decline for a number of mysterious reasons. Things seem to be improving and there are significant efforts to solve the problems dealing with the decline. If you are interested in learning more you can do so [here](https://thehoneybeeconservancy.org/2017/06/22/honey-bees-heroes-planet/).
+The current bee situation prevents an interesting oppurtunity to dive into the data science pipeline with Honey data taken from the National Agricultural Statistics Service. Specifically we can look into trends in bee population and/or honey production.
 
 In this tutorial I will guide you through: scraping honey production data N.A.S.S., making plots to help visualize the data, analyze the size of bee colonies to see if bees how bee populations are changing over the years, and make a predictor using a random forest to see if we can predict whether the number of bees will increase or decrease in the next years.
 
@@ -46,14 +22,14 @@ In this tutorial I will guide you through: scraping honey production data N.A.S.
 I first discovered this data while browsing kaggle. The kaggle dataset, found [here](https://www.kaggle.com/jessicali9530/honey-production), had honey production data recorded from the National Agricultural Statistics Service.
 
 The dataset included data from 1998 to 2012.    
-I found that the dataset was created from a series of `csv` files contained within zip files for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in text files.  
+I found that the dataset was created from a series of `.csv` files contained within zip archives for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in text files.  
 I thought this would be a good oppurtunity showcase the data scraping and tidying parts of the data science pipeline. This will also expand the amount of data we have available for analysis later.
 
 ## Data Scraping and Tidying
 I downloaded all the text documents locally and gave them descriptive names in order to use them easily in my R code I have included the text files in this projects [github repository](https://github.com/idalton/CMSC320Final/tree/gh-pages).  
 I encourage you to look at the text file links below to get a better understanding of the format of the text files and to see what we are working with when we scrape the data from them.  
 
-**links:**  
+**Links:**  
 [HoneyData_1986-1992.txt](./HoneyData_1986-1992.txt)  
 [HoneyData_1993-1997.txt](./HoneyData_1993-1997.txt)  
 [HoneyData_1998-2002.txt](./HoneyData_1998-2002.txt)  
@@ -63,25 +39,34 @@ I encourage you to look at the text file links below to get a better understandi
 
 
 first some setup code  
-Here I extracted the columns from the tables in the text files. I make a vector of the abbreviated names which i can then use as column names when i create the data frames from the scraped table data. The data as it stands now in the tables are in varying aggregate units (ie 1,000's) we will fix this when we create the data frames  
+Here I extracted the columns from the tables in the text files. I make a vector of the abbreviated names which I can then use as column names when I create the data frames from the scraped table data. The data as it stands now in the tables are in varying aggregate units (ie 1,000's) we will fix this when we create the data frames  
 
-also first four files have state abbreviations in place of full statenames. This Is fine and we will use the abreviations for some plots when we make use of pl
- 
+Some of the files use state abbreviations to denote the state while one uses full state names. In order to keep everything consistent I will convert the full names into abbreviations so that resulting data frame will have consistent state values.
  
 ```{r setup}
+# libraries 
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(DT)
+library(tidyr)
+library(readr)
+library(lubridate)
 
 # Column names taken from the text files
 headers <- c(
-  "state", # abreviations
-	"numcolonies", # 1,000s
+  "state", # abreviations 1986-2007, state names 2008-2012
+	"numcolonies", # in 1,000s
 	"yieldpercol", # in pounds
 	"production",# in 1000 pounds
-	"stocks", # 1,000 Pounds
-	"avgprice", # cents
+	"stocks", # in 1,000 Pounds
+	"avgprice", # in cents
 	"value" #$1,000s
   )  
 
-
+# maps from state name to abbreviations and abbreviation to state names
+# these will make it easier to plot values later and keep column contents consistent
 abbr_to_name <- setNames(state.name,state.abb)
 name_to_abbr <- setNames(state.abb,state.name)
 
@@ -90,15 +75,11 @@ name_to_abbr <- setNames(state.abb,state.name)
 
 You may notice that the text format of the data in the `HoneyData_2008-2012.txt` file is slightly different from that of the other files. We will need to address this later by changing how we scrape the data from that file in particular.
 
-Also each of the tables have rows that contain totals at the bottom. I will not be taking the totals data from the files because I only want individual state data from each year. Additionally some states are not listed individually and get clumped together in a `Oth Sts` row.
+Also each of the tables have rows that contain totals at the bottom. I will not be taking the totals data from the files because I only want individual state data from each year. Additionally some states are not listed individually and get clumped together in a `Oth Sts`/`Other States` row.
 
-I will include this missing data by scraping the `Oth Sts` row and dividing it evenly amoung the states it represents. This way i will have some data from each state for each year.
+I will include this missing data by scraping the extra row (if present) and dividing certain values it has evenly amoung the states it represents. This way I will have some data from each state for each year.
 
-I want data for all 50 states and there is data from every state except Alaska which I will include into the the table as all zeros so that i can have data for each state for each year
-
-For now, I will not be including this data. I only want to use state specific data and I dont think there is much benefit in taking the effort to include this data.
-
-
+I want data for all 50 states and there is data from every state except Alaska. Therefore in order to have value for alaska for each year I will include alaska in the table for each year but with all zero values.
 
 **Scraping Data from 1986-2007**  
 
@@ -112,7 +93,31 @@ A couple notes about the file format and how I approached scraping the data befo
 The `gethoneydata`is the data scraping function.
 Given the output of `read_lines`, it finds all the start and end indices of each table, creates a string vector of all the lines of the table, makes each entry space delimited then adds it to a dataframe. The return value of the function is a dataframe that contains the data from each table in the file with an added column indicating the year for that data. The function also takes a `year` value which stands in as the base number to add onto the index to create the year colunms.
 
+I have also included another functions which figures out which states are missing in the parameter table and then adds them to the table with data divided from the `Oth Sts` row. 
 ```{r GetDataFuntion}
+
+# for handling missing state data in 1986-2007
+fillmissingstates <- function(table) {
+  # figure out which states are not present
+    states_not_present <- state.abb[! state.abb %in% table$state]
+    # find the number of states that are not present
+    num_states_not_present <- length(states_not_present)
+    # extract the aggregated other states  table values without the bogus state name
+    other_state_vals <- subset(table, str_detect(table$state,"Sts"))[-1]
+    # we only want the data colunms so we can drop the first column
+    # and then we want the other cols to be divided by the number of states they are summed from
+    # except for yieldpercol and avg price
+    other_state_vals[1,1] <- round(other_state_vals[1,1]/num_states_not_present)
+    other_state_vals[1,3] <- round(other_state_vals[1,3]/num_states_not_present)
+    other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
+    other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
+    
+    other <- cbind(states_not_present,other_state_vals)
+    colnames(other)[1] <- "state"
+  
+    table <- table %>% rbind(other) %>%
+      filter(!str_detect(state,"Sts"))
+}
 
 gethoneydata <- function(text,year) {
    # there is a space there because apparently one of the files has
@@ -161,49 +166,51 @@ gethoneydata <- function(text,year) {
   df
 }
 
-fillmissingstatesv1 <- function(table) {
-  # figure out which states are not present
-    states_not_present <- state.abb[! state.abb %in% table$state]
-    # find the number of states that are not present
-    num_states_not_present <- length(states_not_present)
-    # extract the aggregated other states  table values without the bogus state name
-    other_state_vals <- subset(table, str_detect(table$state,"Sts"))[-1]
-    # we only want the data colunms so we can drop the first column
-    # and then we want the other cols to be divided by the number of states they are summed from
-    # except for yieldpercol and avg price
-    other_state_vals[1,1] <- round(other_state_vals[1,1]/num_states_not_present)
-    other_state_vals[1,3] <- round(other_state_vals[1,3]/num_states_not_present)
-    other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
-    other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
-    
-    other <- cbind(states_not_present,other_state_vals)
-    colnames(other)[1] <- "state"
-  
-    table <- table %>% rbind(other) %>%
-      filter(!str_detect(state,"Sts"))
-}
 
-fillmissingstatesv2 <- function(table) {
-  # figure out which states are not present
-    states_not_present <- state.name[! state.name %in% table$state]
-    # find the number of states that are not present
-    num_states_not_present <- length(states_not_present)
-    # extract the aggregated other states  table values without the bogus state name
-    other_state_vals <- subset(table, str_detect(table$state,"States"))[-1]
-    # we only want the data colunms so we can drop the first column
-    # and then we want the other cols to be divided by the number of states they are summed from
-    # except for yieldpercol and avg price
-    other_state_vals[1,1] <- round(other_state_vals[1,1]/num_states_not_present)
-    other_state_vals[1,3] <- round(other_state_vals[1,3]/num_states_not_present)
-    other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
-    other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
+
+
+  for (index in 1:length(start_lines)){
     
-    other <- cbind(states_not_present,other_state_vals)
-    colnames(other)[1] <- "state"
+    # default table is AL to WY
+    table <- text[start_lines[index]:end_lines[index]]
+    # however if there an other states row exactly 3 lines below then we know the table has missing states
+    bool <- ((end_lines[index]+3) %in% othersts_lines)
+    # since we have index bounds of the table we can grab the lines that make up the table
+    if(bool) table <- text[start_lines[index]:(end_lines[index]+3)]
+    
+    #then we throe the line character vectors through the pipeline
+    table <- table %>%
+      str_replace_all("/", " ") %>%         # remove any '/' characters
+      str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
+      data_frame() %>%
+      # split on that space delmiter and give the columns nice names
+      separate(1,sep = " : ",c("state","data"), extra="drop") %>% #separate first on the semicolon
+      separate(2,sep = " ",headers[-1], extra="drop") %>%
+      rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
+      # remove any lines with na
+      drop_na() %>%
+      # add a column for the year this data belongs two
+      mutate(year = rep(as.integer(3+index))) %>%
+      # most of the data now is chars and groped units (i.e. 1000s pounds etc)
+      # the gsub calls are needed to prevent the ","s from messing up as.numeric
+      mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
+      mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
+      mutate(production = as.numeric(gsub(",","",production))*1000) %>%
+      mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
+      mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
+      mutate(value = as.numeric(gsub(",","",value))*1000)
+
+    if (bool)  table <- fillmissingstatesv1(table)
+
+    table <- table[c(1,8,2,3,4,5,6,7)]
+
+    df = rbind(df,table)
+  }
+  df
   
-    table <- table %>% rbind(other) %>%
-      filter(!str_detect(state,"States"))
-}
+
+
+
 
 ```
 
@@ -283,31 +290,10 @@ text <- read_lines ("HoneyData_1986-1992.txt")
 
     table <- table[c(1,8,2,3,4,5,6,7)]
 
-    # df = rbind(df,table)
+    df = rbind(df,table)
   }
-  # df
-  table
-
+  df
   
-      #   separate(2,sep = " ",headers[-1], extra="drop") %>%
-      # rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
-      # # remove any lines with na
-      # # drop_na() %>%
-      # # add a column for the year this data belongs two
-      # mutate(year = rep(as.integer(3+index))) %>%
-      # # most of the data now is chars and groped units (i.e. 1000s pounds etc)
-      # # the gsub calls are needed to prevent the ","s from messing up as.numeric
-      # mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
-      # mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
-      # mutate(production = as.numeric(gsub(",","",production))*1000) %>%
-      # mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
-      # mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
-      # mutate(value = as.numeric(gsub(",","",value))*1000)
-
-      # table <- if_else(str_detect(table$state,"Sts"),fillmissingstates(table),table)
-    # if (str_detect(table$state,"Sts"))  table <- fillmissingstates(table)
-
-    # table <- table[c(1,8,2,3,4,5,6,7)]
 
 ```
 
@@ -405,7 +391,6 @@ datatable(masterhoneydf,filter="top",style="bootstrap")
 lets make some nice plots that visualize some of the data we scraped.
 
 
-
 ###Number of Honey Colonies over Time
 
 ```{r plot1}
@@ -431,7 +416,7 @@ masterhoneydf %>%
 ```
 ###Number of Honey Colonies in Each State
 
-There are multiple ways to show this. I will avaerage the number of colonies for each state each year and then dsplay the numbers on a bar plot. This will show which states have the most bee colonies as well as the distibution of bee colonies over the fifty states.
+To show this, I will avaerage the number of colonies for each state over time and then dsplay the numbers on a bar plot. This will show which states have the most bee colonies as well as the distibution of bee colonies over the fifty states.
 **Bar Plot**
 ```{r plot2v1}
 masterhoneydf %>%
@@ -445,7 +430,7 @@ masterhoneydf %>%
 
 ```
 
-This chart does not look very nice as the values are not in order. lets revise the r code to show the values in order using `reorder`.
+This chart does not look very nice as the values are not in order. lets revise the r code to show the values in order using `reorder` on the `x` parameter in the `aes` function call.
 **Bar Plot Revised**
 ```{r plot2v2}
 masterhoneydf %>%
@@ -458,9 +443,10 @@ masterhoneydf %>%
 
 ```
 
+But we can do more, Since we have State data we can show the data geographically.
 
 ### plot 3 : United States 
-Another cool thing we can do this data is to plot values onto a map of the united states. There is a conveient R package that provides an easy way to do this. It is `fiftystater`. It has a map object that can be passed into `geom_map` and so long as you provide a `map_id` connecting each peice of data with a particular state then ggplot can make a nice looking map like the one below.
+There is a conveient R package that provides an easy way to do this. It is `fiftystater`. It has a map object that can be passed into `geom_map` and so long as you provide a `map_id` connecting each peice of data with a particular state then ggplot can make a nice looking map like the one below.
 
 ```{r fiftstates}
 library(fiftystater)
