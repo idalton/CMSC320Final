@@ -426,7 +426,7 @@ In order to make the model we will need to change our `masterhoneydf` such that 
 
 ```{r}
 wide_honey_df <- masterhoneydf %>%
-  # filter(year <= 2011) %>%
+  filter(year <= 2011) %>%
   select(state, year, numcolonies) %>%
   spread(year, numcolonies)
 ```
