@@ -13,16 +13,19 @@ knitr::opts_chunk$set(echo = TRUE,message=FALSE, warning=FALSE,fig.width=12, fig
 ```
 
 ## Introduction  
-Do you like Bees? I dont like bees, but I do like honey and bee plant pollination. Bees are incredibly important for agriculture because the plant pollination they provide. A large portion of the food people eat comes from plants that have been pollinated by bees. In recent years bee colonies were in decline for a number of mysterious reasons. Things seem to be improving and there are significant efforts to solve the problems dealing with the decline. If you are interested in learning more you can do so [here](https://thehoneybeeconservancy.org/2017/06/22/honey-bees-heroes-planet/).
+Do you like Bees? I dont like bees, but I do like honey and bee plant pollination. Bees are incredibly important for agriculture because the plant pollination they provide. A large portion of the food people eat comes from plants that have been pollinated by bees. In recent years, bee colonies were in decline for a number of mysterious reasons. Things seem to be improving and there are significant efforts to solve the problems dealing with the decline. If you are interested in learning more you can do so [here](https://thehoneybeeconservancy.org/2017/06/22/honey-bees-heroes-planet/).
 The current bee situation prevents an interesting oppurtunity to dive into the data science pipeline with Honey data taken from the National Agricultural Statistics Service. Specifically we can look into trends in bee population and/or honey production.
 
 In this tutorial I will guide you through: scraping honey production data N.A.S.S., making plots to help visualize the data, analyze the size of bee colonies to see if bees how bee populations are changing over the years, and make a predictor using a random forest to see if we can predict whether the number of bees will increase or decrease in the next years.
 
-**DATA**  
+
+###Data
+
 I first discovered this data while browsing kaggle. The kaggle dataset, found [here](https://www.kaggle.com/jessicali9530/honey-production), had honey production data recorded from the National Agricultural Statistics Service.
 
-The dataset included data from 1998 to 2012.    
-I found that the dataset was created from a series of `.csv` files contained within zip archives for years 1998-2012.   However the National Agricultural Statistics Service website has data from 1986 and onward in text files.  
+The dataset included data from 1998 to 2012.      
+
+I found that the dataset was created from a series of `.csv` files contained within zip archives for years 1998-2012.   However the [website](http://usda.mannlib.cornell.edu/MannUsda/viewDocumentInfo.do?documentID=1520) has data from 1986 and onward in text files.  
 I thought this would be a good oppurtunity showcase the data scraping and tidying parts of the data science pipeline. This will also expand the amount of data we have available for analysis later.
 
 ## Data Scraping and Tidying
@@ -36,10 +39,8 @@ I encourage you to look at the text file links below to get a better understandi
 [HoneyData_2003-2007.txt](./HoneyData_2003-2007.txt)  
 [HoneyData_2008-2012.txt](./HoneyData_2008-2012.txt)  
 
-
-
-first some setup code  
-Here I extracted the columns from the tables in the text files. I make a vector of the abbreviated names which I can then use as column names when I create the data frames from the scraped table data. The data as it stands now in the tables are in varying aggregate units (ie 1,000's) we will fix this when we create the data frames  
+### Setup
+I extracted the columns from the tables in the text files. I make a vector of the abbreviated names which I can then use as column names when I create the data frames from the scraped table data. The data as it stands now in the tables are in varying aggregate units (ie 1,000's) we will fix this when we create the data frames  
 
 Some of the files use state abbreviations to denote the state while one uses full state names. In order to keep everything consistent I will convert the full names into abbreviations so that resulting data frame will have consistent state values.
  
@@ -81,7 +82,7 @@ I will include this missing data by scraping the extra row (if present) and divi
 
 I want data for all 50 states and there is data from every state except Alaska. Therefore in order to have value for alaska for each year I will include alaska in the table for each year but with all zero values.
 
-**Scraping Data from 1986-2007**  
+###Scraping Data from 1986-2007
 
 For the most part, the first four files that deal with years 1986-2007 have the same format so we can reuse the code to scrape the data from them. I made a function that will scrape the data when given the text information of the files
 
@@ -112,9 +113,11 @@ fillmissingstates <- function(table) {
     other_state_vals[1,4] <- round(other_state_vals[1,4]/num_states_not_present)
     other_state_vals[1,6] <- round(other_state_vals[1,6]/num_states_not_present)
     
+    # make a one-off df that has all the missing states and the newly calulated values
     other <- cbind(states_not_present,other_state_vals)
     colnames(other)[1] <- "state"
   
+    # merge the new data frame with the original and remove the other states row
     table <- table %>% rbind(other) %>%
       filter(!str_detect(state,"Sts"))
 }
@@ -131,16 +134,25 @@ gethoneydata <- function(text,year) {
   # for each table found in the text file
   for (index in 1:length(start_lines)){
     
-    # since we have index bounds of the table we can grab the lines that make up the table
+       # default table is AL to WY
     table <- text[start_lines[index]:end_lines[index]]
-    # then we throe the line character vectors through the pipeline
+    # however if there an other states row exactly 3 lines below then we know the table has missing states
+    bool <- ((end_lines[index]+3) %in% othersts_lines)
+    # since we have index bounds of the table we can grab the lines that make up the table
+    if(bool) table <- text[start_lines[index]:(end_lines[index]+3)]
+    
+    # then we throw the line character vectors through the pipeline
     table <- table %>% 
-      str_replace_all(":", "") %>%         # remove the ':' at the start
+      str_replace_all("/", " ") %>%         # remove any '/' characters
       str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
       data_frame() %>%
+
       # split on that space delmiter and give the columns nice names
-      separate(1,sep = " ",headers, extra="drop") %>% 
+      separate(1,sep = " : ",c("state","data"), extra="drop") %>%
+      separate(2,sep = " ",headers[-1], extra="drop") %>%
       rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
+      # remove any lines with na
+      drop_na() %>%
       # add a column for the year this data belongs two
       mutate(year = rep(as.integer(year+index))) %>%
       # most of the data now is chars and groped units (i.e. 1000s pounds etc)
@@ -152,8 +164,8 @@ gethoneydata <- function(text,year) {
       mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
       mutate(value = as.numeric(gsub(",","",value))*1000)
     
-      # table <- if_else(str_detect(table$state,"Sts"),fillmissingstates(table),table)
-    # if (str_detect(table$state,"Sts"))  print(index)
+    # if we know the data has missing states than we need to send it the fixer function
+    if (bool)  table <- fillmissingstates(table)
     
     # here I rearrange the columns such that the year value comes right after the state.abb
     # I just do this because I think it makes it look slightly better.
@@ -165,51 +177,6 @@ gethoneydata <- function(text,year) {
   #return the accumlated data frame
   df
 }
-
-
-
-
-  for (index in 1:length(start_lines)){
-    
-    # default table is AL to WY
-    table <- text[start_lines[index]:end_lines[index]]
-    # however if there an other states row exactly 3 lines below then we know the table has missing states
-    bool <- ((end_lines[index]+3) %in% othersts_lines)
-    # since we have index bounds of the table we can grab the lines that make up the table
-    if(bool) table <- text[start_lines[index]:(end_lines[index]+3)]
-    
-    #then we throe the line character vectors through the pipeline
-    table <- table %>%
-      str_replace_all("/", " ") %>%         # remove any '/' characters
-      str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
-      data_frame() %>%
-      # split on that space delmiter and give the columns nice names
-      separate(1,sep = " : ",c("state","data"), extra="drop") %>% #separate first on the semicolon
-      separate(2,sep = " ",headers[-1], extra="drop") %>%
-      rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
-      # remove any lines with na
-      drop_na() %>%
-      # add a column for the year this data belongs two
-      mutate(year = rep(as.integer(3+index))) %>%
-      # most of the data now is chars and groped units (i.e. 1000s pounds etc)
-      # the gsub calls are needed to prevent the ","s from messing up as.numeric
-      mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
-      mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
-      mutate(production = as.numeric(gsub(",","",production))*1000) %>%
-      mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
-      mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
-      mutate(value = as.numeric(gsub(",","",value))*1000)
-
-    if (bool)  table <- fillmissingstatesv1(table)
-
-    table <- table[c(1,8,2,3,4,5,6,7)]
-
-    df = rbind(df,table)
-  }
-  df
-  
-
-
 
 
 ```
@@ -225,81 +192,26 @@ honey_1993_1997 <- read_lines ("HoneyData_1993-1997.txt")
 honey_1998_2002 <- read_lines ("HoneyData_1998-2002.txt")
 honey_2003_2007 <- read_lines ("HoneyData_2003-2007.txt")
 
-
 masterhoneydf = NULL
 
+# mulitple rbind calls will build the final dataframe
 masterhoneydf <- masterhoneydf %>%
   rbind(gethoneydata(honey_1986_1992,1985)) %>%
   rbind(gethoneydata(honey_1993_1997,1992)) %>%
   rbind(gethoneydata(honey_1998_2002,1997)) %>%
   rbind(gethoneydata(honey_2003_2007,2002))
 
+# here I make individual data frames for each file in case I want to use them later
 honey_1986_1992df <- gethoneydata(honey_1986_1992,1985)
 honey_1993_1997df <- gethoneydata(honey_1993_1997,1992)
 honey_1998_2002df <- gethoneydata(honey_1998_2002,1997)
 honey_2003_2007df <- gethoneydata(honey_2003_2007,2002)
-
-
-
-```
-
-```{r test}
-
-text <- read_lines ("HoneyData_1986-1992.txt")
-
- # there is a space there because apparently one of the files has
-  # the string "AL" which was messing up the grep search
-  start_lines <- c(grep("AL ",text))
-  # I included the space here as well just to be safe
-  end_lines <- c(grep("WY ",text))
-  othersts_lines <- c(grep("Sts",text))  
-  
-  df = NULL # intializing the accumlator data frame
-  # for each table found in the text file
-  for (index in 1:length(start_lines)){
-    
-    table <- text[start_lines[index]:end_lines[index]]
-    
-    bool <- ((end_lines[index]+3) %in% othersts_lines)
-    # since we have index bounds of the table we can grab the lines that make up the table
-    if(bool) table <- text[start_lines[index]:(end_lines[index]+3)]
-    
-    #then we throe the line character vectors through the pipeline
-    table <- table %>%
-      str_replace_all("/", " ") %>%         # remove any '/' characters
-      str_replace_all("\\s\\s*", " " ) %>% # replace all series of whitespace with a single space
-      data_frame() %>%
-      # split on that space delmiter and give the columns nice names
-      separate(1,sep = " : ",c("state","data"), extra="drop") %>% #separate first on the semicolon
-      separate(2,sep = " ",headers[-1], extra="drop") %>%
-      rbind(c("AK",rep("0",7))) %>% # adding a zero line for alaska
-      # remove any lines with na
-      drop_na() %>%
-      # add a column for the year this data belongs two
-      mutate(year = rep(as.integer(3+index))) %>%
-      # most of the data now is chars and groped units (i.e. 1000s pounds etc)
-      # the gsub calls are needed to prevent the ","s from messing up as.numeric
-      mutate(numcolonies = as.numeric(gsub(",","",numcolonies))*1000) %>%
-      mutate(yieldpercol = as.numeric(gsub(",","",yieldpercol))) %>%
-      mutate(production = as.numeric(gsub(",","",production))*1000) %>%
-      mutate(stocks = as.numeric(gsub(",","",stocks))*1000) %>%
-      mutate(avgprice = as.numeric(gsub(",","",avgprice))/100) %>%
-      mutate(value = as.numeric(gsub(",","",value))*1000)
-
-    if (bool)  table <- fillmissingstatesv1(table)
-
-    table <- table[c(1,8,2,3,4,5,6,7)]
-
-    df = rbind(df,table)
-  }
-  df
-  
-
 ```
 
 
-**Scraping Data from 2008-2012**  
-The methodology of scraping the data will be basically the same but this time instead of state abreviations being the start of the tables it is the full state names. There is also different unecessary characters withing the table rows that we will need to remove. I have included a link to this file in particular below for conveince 
+
+### Scraping Data from 2008-2012  
+The methodology of scraping the data will be basically the same but this time instead of state abreviations being the start of the tables it is the full state names. There is also different unecessary characters withing the table rows that we will need to remove. I have included a link to this file in particular below.
 
 [HoneyData_2008-2012.txt](./HoneyData_2008-2012.txt)
 
@@ -308,7 +220,7 @@ There are two problems with the tables in this file
   - some state names have spaces so we need to be careful when splitting on spaces
   - there are some blank lines in the tables that need to be removed
   
-Also in order to keep this data frame consistent with the previous ones i will translate the full state names into their respective two letter abbreviation.
+Also in order to keep this data frame consistent with the previous ones I will translate the full state names into their respective two letter abbreviation.
 ```{r anotherone}
 
 text <- read_lines("HoneyData_2008-2012.txt")
@@ -371,15 +283,17 @@ for (index in 1:length(start_lines)){
     table <- table[c(1,8,2,3,4,5,6,7)]
     # 
     # # iteratively rbind the current years table to the accumulator dataframe
-    honey_2008_2012df = rbind(honey_2008_2012df,table)
-  }
-honey_2008_2012df
+    honey_2008_2012df <- rbind(honey_2008_2012df,table)
+}
+
+# now we just need to add this data to master data frame
+masterhoneydf <- rbind(masterhoneydf,honey_2008_2012df)
 
 ```
 
 
 ### U.S. Honey Production Data 1986 - 2012
-The combined Honey Production Data.  
+The Combined Honey Production Data.  
 
 ```{r, result='asis', echo=FALSE}
 datatable(masterhoneydf,filter="top",style="bootstrap")
@@ -388,10 +302,11 @@ datatable(masterhoneydf,filter="top",style="bootstrap")
 
 
 ## Exploratory Data Analysis
-lets make some nice plots that visualize some of the data we scraped.
 
+The main idea behind Exploratory Data Analysis is to better understand the data which we can do that by visualizing the data and thinking about what it shows us.
+So lets make some nice plots that visualize some of the data we scraped.
 
-###Number of Honey Colonies over Time
+### Number of Honey Colonies over Time
 
 ```{r plot1}
 masterhoneydf %>%
@@ -403,9 +318,8 @@ masterhoneydf %>%
 
 ```
 
-
 ### Honey Production over Time
-another chart that shows the change in production
+This chart in the same format shows the change in production over time
 ```{r prod}
 masterhoneydf %>%
   ggplot(aes(x=year,y=production,group=factor(state))) +
@@ -414,9 +328,11 @@ masterhoneydf %>%
   labs(title="Honey production in States over Time",
           x="Year", y="Honey Production")
 ```
-###Number of Honey Colonies in Each State
+Honey production does not seem to follow the number of colonies as closely as I thought. This is probably indicative of me not knowing enough about honey prodcution to understand why. Just one example of insights you can get when you visualize the data.
 
-To show this, I will avaerage the number of colonies for each state over time and then dsplay the numbers on a bar plot. This will show which states have the most bee colonies as well as the distibution of bee colonies over the fifty states.
+### Number of Honey Colonies in Each State
+
+To show this, I will average the number of colonies for each state over time and then display the numbers on a bar plot. This will show which states have the most bee colonies as well as the distibution of bee colonies over the fifty states.
 **Bar Plot**
 ```{r plot2v1}
 masterhoneydf %>%
@@ -442,13 +358,12 @@ masterhoneydf %>%
           x="State", y="Number of Colonies")
 
 ```
+Much nicer but we can do more. Since we have State data we can show the data geographically with some help from some nice R packages.
 
-But we can do more, Since we have State data we can show the data geographically.
-
-### plot 3 : United States 
+### Plotting Data Geographically
 There is a conveient R package that provides an easy way to do this. It is `fiftystater`. It has a map object that can be passed into `geom_map` and so long as you provide a `map_id` connecting each peice of data with a particular state then ggplot can make a nice looking map like the one below.
 
-```{r fiftstates}
+```{r fiftystates}
 library(fiftystater)
 
 # summarizing the honyey data frame 
@@ -471,44 +386,81 @@ masterhoneydf %>%
 
 ```
 
-However, to get the above map I just calculated the average number of colonies over all years for each state. This does not show any change over time. One way we can do this is to facet the data and show mulitple charts together each displaying data from different time periods. To show this I will facet the data based on the set of years used in each text file which will yield 5 maps you can see in the grid below.
 
-```{r mapfacet}
 
-```
+When looking at charts in our data we should be looking for interesting insights as well as any problems we can see. Ideally we should be thinking about questions such as:  
+what do these plots show us?  
+Are there any peculiarites in the data that we need to address?  
+Are there any interesting insights that may have been discovered?  
 
-facet every five years
+From the charts we can see that Califournia is the honey production powerhouse of the United States. More importantly if we looked the number of honey colonies over time we can see a decline in the number of colonies. This is most likely casued by [Colony Collapse Disorder](https://en.wikipedia.org/wiki/Colony_collapse_disorder) Which is one of problems that prompted me to explore this data.
 
-When looking at charts in our data we should be looking for interesting insights as well as any problems we can see. Ideally we should be thinking about questions like:
-what do these plots show us?
-Are there any peculiarites in the data that we need to address?
-Are there any interesting insights that may have been discovered?
-
-From the charts we can see that Califournia is the honey production powerhouse of the United States. More importantly if we looked the number of honey colonies over time we can see a decline in the number of colonies. This is most likely casued by [Colony Collapse Disorder](https://en.wikipedia.org/wiki/Colony_collapse_disorder) which in the past years has become a significant population for bees.
-
-##Machine Learning
+## Machine Learning
 In this section I will show how to create a prediction model with the given data. Particularly, the model will predict the whether the change of number of colonies will go up or down. In this paritcular example we will try to predict the change in number of colonies in 2012 using all the data prior to 2012 (1986-2011). In order to do this we will need to create a data frame that has the result we are looking for.
 
-###Setup
-This new outcome dataframe needs to...
+### Setup: Creting the Target Outcome
+This new outcome dataframe needs to only have the state and the result (up or down) of the change in the number of colonies from 2011 to 2012.
 ```{r outcome}
+outcome_honey_df <- masterhoneydf %>%
+  # limit to 2011,2012 data
+  filter(year %in% c("2011", "2012")) %>%
+  select(state, year, numcolonies) %>%
+  # need new colomns for each years value
+  spread(year, numcolonies) %>%
+  # then we can subtract them to get the result
+  mutate(diff = `2011` - `2012`) %>%
+  # encode the result as either 'up' or 'down'
+  mutate(Direction = ifelse(diff>0, "up", "down")) %>%
+  # drop the other columns
+  select(state, Direction)
+```
 
+```{r echo=FALSE}
+datatable(outcome_honey_df,style="bootstrap")
 ```
 
 
-###Creating the Model 
-I will make use of a random forest to make the model...
+ 
+### Setup: Adjusting our Data Frame
+In order to make the model we will need to change our `masterhoneydf` such that each row corresponds to a state and each columns coresponds to a value of the number of colnoies for that year. We are essentially widening our data frame and as such I will call the new data fram `widedf`. Also I exclude 2012 data because do not want to include the 2012 data in the data frame we will use to make the model.
+
 ```{r}
+wide_honey_df <- masterhoneydf %>%
+  # filter(year <= 2011) %>%
+  select(state, year, numcolonies) %>%
+  spread(year, numcolonies)
+```
 
+```{r echo=FALSE}
+datatable(wide_honey_df,style="bootstrap",options= list(scrollX = TRUE))
+```
+
+### Creating the Model
+
+In order to create the model we need to combine the outcome dataframe and the widened data frame so that the model can have a variable to predict one. once this is down we can go ahead and make the model.
+
+```{r}
+library(randomForest)
+
+final_honey_df <- wide_honey_df %>%
+  inner_join(outcome_honey_df, by="state") %>%
+  mutate(Direction=factor(Direction, levels=c("down", "up"))) %>%
+  data.frame() # neede to fix columns names that make randomForest unhappy
+
+# now we can make the random forest
+
+rf_honey <- randomForest(Direction~., data=final_honey_df %>% select(-state))
+rf_honey
 ```
 
 
+### Testing
+To test this model we would use a k-fold cross valdidation technique. Unfortunately I was unable to complete this section in time. Im sorry to let you down. If you like to learn more about k-fold cross validiation I recommend checking out these excellent lecture notes: [K-Fold Cross Validation](http://www.hcbravo.org/IntroDataSci/bookdown-notes/model-selection.html#k-fold-cross-validation).
 
+## Conclusion
 
-###Testing
-To test this model we would use a k-fold cross valdidation technique. Unfortunately I was unable to complete this section in time. Im sorry to let you down. If you like to learn more about k-fold cross validiation I recommend checking out this site and this set of lecture slides from my Intro to data science course
+We learned how to scrape data from text files, how to handle missing data. We saw how to make graphs that can intuitively show the data and how attributes relate to one another. We were also able to make a map that that can show the data geographically which is not always possible in some datasets.
 
-##Conclusion
+Additionally, we laid the foundataion for creating and testing a prediction model based on random forest.
 
-We learned how to scrape data from text files, how to handle missing data. We saw how to make graphs that can intuitively show the data and how attributes relate to one another. We were also able to make a map that that can show the data geographically which is not always possible in some datasets
-
+I hoped you liked the tuturial.
